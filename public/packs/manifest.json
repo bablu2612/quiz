@@ -1,0 +1,34 @@
+{
+  "application.js": "/packs/js/application-f575cc113d4bf1227819.js",
+  "application.js.map": "/packs/js/application-f575cc113d4bf1227819.js.map",
+  "devise.js": "/packs/js/devise-a269b6720f39fd4191a9.js",
+  "devise.js.map": "/packs/js/devise-a269b6720f39fd4191a9.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-f575cc113d4bf1227819.js"
+      ],
+      "js.map": [
+        "/packs/js/application-f575cc113d4bf1227819.js.map"
+      ]
+    },
+    "devise": {
+      "js": [
+        "/packs/js/devise-a269b6720f39fd4191a9.js"
+      ],
+      "js.map": [
+        "/packs/js/devise-a269b6720f39fd4191a9.js.map"
+      ]
+    },
+    "home": {
+      "js": [
+        "/packs/js/home-74938c090d4e5dd9c93a.js"
+      ],
+      "js.map": [
+        "/packs/js/home-74938c090d4e5dd9c93a.js.map"
+      ]
+    }
+  },
+  "home.js": "/packs/js/home-74938c090d4e5dd9c93a.js",
+  "home.js.map": "/packs/js/home-74938c090d4e5dd9c93a.js.map"
+}
