@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_02_04_100927) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -72,7 +75,7 @@ ActiveRecord::Schema.define(version: 2022_02_04_100927) do
     t.integer "quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "type_id"
+    t.bigint "type_id"
     t.index ["quiz_id"], name: "index_type_of_quizzes_on_quiz_id"
     t.index ["type_id"], name: "index_type_of_quizzes_on_type_id"
   end

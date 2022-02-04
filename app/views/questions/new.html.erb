@@ -121,9 +121,13 @@
 
 <script>
   var optionNo=1;
+  $("#correct_answer").append("<option id='option"+optionNo+"'> option"+optionNo+"</option>");
+
     $("#add-option-button").on("click",function() {
-      $("#correct_answer").append("<option id='option"+optionNo+"'>"+$("#option"+optionNo).val()+"</option>");
       optionNo++;
+
+      $("#correct_answer").append("<option id='option"+optionNo+"'> option"+optionNo+"</option>");
+
       $(".option").append('<label for="option'+optionNo+'">Option'+optionNo+'.</label>');
       $(".option").append('<input type="text" name="option'+optionNo+'" id="option'+optionNo+'" onkeyup="addNewQuestion(this.value)" class="option option-of-question block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">');
       $("#add-option-button").css("display","none");

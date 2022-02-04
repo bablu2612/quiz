@@ -1,7 +1,8 @@
 <div id="<%= dom_id type_of_quiz %>">
   <tr>
+
     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-      <%= image_tag "type_of_quiz/mcq.png",class: "h-34" %>
+      <%= image_tag "type_of_quiz/"+type_of_quiz.type.name+".png",class: "h-34" %>
     </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
       <%= type_of_quiz.type.name %>
