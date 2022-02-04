@@ -25,7 +25,7 @@ class TypeOfQuizzesController < ApplicationController
 
     respond_to do |format|
       if @type_of_quiz.save
-        format.html { redirect_to type_of_quiz_url(@type_of_quiz), notice: "Type of quiz was successfully created." }
+        format.html { redirect_to type_of_quizzes_path(quiz_id: @type_of_quiz.quiz_id), notice: "Type of quiz was successfully created." }
         format.json { render :show, status: :created, location: @type_of_quiz }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TypeOfQuizzesController < ApplicationController
   def update
     respond_to do |format|
       if @type_of_quiz.update(type_of_quiz_params)
-        format.html { redirect_to type_of_quiz_url(@type_of_quiz), notice: "Type of quiz was successfully updated." }
+        format.html { redirect_to type_of_quizzes_path(quiz_id: @type_of_quiz.quiz_id), notice: "Type of quiz was successfully updated." }
         format.json { render :show, status: :ok, location: @type_of_quiz }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class TypeOfQuizzesController < ApplicationController
     @type_of_quiz.destroy
 
     respond_to do |format|
-      format.html { redirect_to type_of_quizzes_url, notice: "Type of quiz was successfully destroyed." }
+      format.html { redirect_to type_of_quizzes_url(quiz_id: @type_of_quiz.quiz_id), notice: "Type of quiz was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,6 @@ class TypeOfQuizzesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def type_of_quiz_params
-      params.require(:type_of_quiz).permit(:name, :description, :quiz_id)
+      params.require(:type_of_quiz).permit(:type_id, :description, :quiz_id)
     end
 end

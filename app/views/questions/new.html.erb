@@ -1,7 +1,157 @@
-<div class="mx-auto md:w-2/3 w-full">
+<!-- <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl">New question</h1>
 
   <%= render "form", question: @question %>
 
   <%= link_to 'Back to questions', questions_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>
+-->
+<div class="mx-auto w-full text-gray-700 px-4 py-4 bg-white mt-4 shadow-xl">
+  <h1 class="mx-auto text-center uppercase text-gray-500 text-3xl"><%= @type_of_quiz_name %></h1>
+  <%= form_tag id:"question-form" do %>
+    <% if @type_of_quiz_name == "MCQ" || @type_of_quiz_name =="Select one" %>
+      <div class="questions">
+        <div class="my-5" id="quesition">
+          <div class="question">
+            <%= label_tag :question,"Q." %>
+            <%= text_area_tag :question,"",id:"question",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+          <br>
+          <div class="option">
+            <%= label_tag :option1, "Option 1." %>
+            <%= text_field_tag :option1,"",id:"option1", onkeyup:"addNewQuestion(this.value)",class: "option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+          <div class="correct-answer mt-4">
+            <%= label_tag :correct_answer, "Please Select Correct Answer",class:"mr-4" %>
+            <%= select_tag(:correct_answer) %>
+          </div>
+          <button type="button" id="add-option-button" class="hidden float-right mt-5 bg-transparent hover:bg-green-700 text-green-800 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent rounded">
+            Add Option
+          </button>
+        </div>
+      </div>
+      <br>
+      <%= hidden_field_tag :type_of_quiz,params[:type_of_quiz]%>
+    <div>
+        <button type="button" id="save-button" class="hidden shadow-xl float-left mt-5 bg-cyan-800 text-white font-semibold px-4 py-2 hover:bg-cyan-600 rounded">
+          Save
+        </button>
+    </div>
+    <% elsif @type_of_quiz_name == "Fill ups" %>
+      <div class="questions">
+        <div class="my-5" id="quesition">
+          <div class="question">
+            <%= label_tag :question,"Q1." %>
+            Before blank space(_______________)
+            <%= text_field_tag :before_question,"",id:"before_question",class: "mb-2 block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+            (_______________)After blank space
+            <%= text_field_tag :after_question,"",id:"after_question",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+            <%= hidden_field_tag :question,"",id:"question",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+          <br>
+          <div class="correct-answer mt-4">
+            <%= label_tag :correct_answer,"Enter Correct Answer"%>
+            <%= text_field_tag :correct_answer,"",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+        </div>
+      </div>
+      <br>
+      <%= hidden_field_tag :type_of_quiz,params[:type_of_quiz]%>
+      <div>
+        <button type="button" id="save-button-fillups" class="shadow-xl float-left mt-5 bg-cyan-800 text-white font-semibold px-4 py-2 hover:bg-cyan-600 rounded">
+          Save
+        </button>
+      </div>
+    <% elsif @type_of_quiz_name =="Jumbled Words" %>
+      <div class="questions">
+        <div class="my-5" id="quesition">
+          <div class="question">
+            <%= label_tag :question,"Q1." %>
+            <%= text_area_tag :question,"",id:"question",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+          <br>
+          <div class="correct-answer mt-4">
+            <%= label_tag :correct_answer,"Enter Correct Answer"%>
+            <%= text_field_tag :correct_answer,"",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+        </div>
+      </div>
+      <br>
+      <%= hidden_field_tag :type_of_quiz,params[:type_of_quiz]%>
+      <div>
+        <button type="button" id="save-button" class="shadow-xl float-left mt-5 bg-cyan-800 text-white font-semibold px-4 py-2 hover:bg-cyan-600 rounded">
+          Save
+        </button>
+      </div>
+    <% elsif @type_of_quiz_name =="Mid-text-selecter" %>
+      <div class="questions">
+        <div class="my-5" id="quesition">
+          <div class="question">
+            <%= label_tag :question,"Q1." %>
+            Before options space
+            <%= text_field_tag :before_question,"",id:"before_question",class: "mb-2 block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+            After options space
+            <%= text_field_tag :after_question,"",id:"after_question",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+            <%= hidden_field_tag :question,"",id:"question",class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+          <br>
+          <div class="option">
+            <%= label_tag :option1, "Option 1." %>
+            <%= text_field_tag :option1,"",id:"option1", onkeyup:"addNewQuestion(this.value)",class: "option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+          <div class="correct-answer mt-4">
+            <%= label_tag :correct_answer, "Please Select Correct Answer",class:"mr-4" %>
+            <%= select_tag(:correct_answer) %>
+          </div>
+          <button type="button" id="add-option-button" class="hidden float-right mt-5 bg-transparent hover:bg-green-700 text-green-800 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent rounded">
+            Add Option
+          </button>
+        </div>
+      </div>
+      <br>
+      <%= hidden_field_tag :type_of_quiz,params[:type_of_quiz]%>
+      <div>
+        <button type="button" id="save-button-fillups" class="shadow-xl float-left mt-5 bg-cyan-800 text-white font-semibold px-4 py-2 hover:bg-cyan-600 rounded">
+          Save
+        </button>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  var optionNo=1;
+    $("#add-option-button").on("click",function() {
+      $("#correct_answer").append("<option id='option"+optionNo+"'>"+$("#option"+optionNo).val()+"</option>");
+      optionNo++;
+      $(".option").append('<label for="option'+optionNo+'">Option'+optionNo+'.</label>');
+      $(".option").append('<input type="text" name="option'+optionNo+'" id="option'+optionNo+'" onkeyup="addNewQuestion(this.value)" class="option option-of-question block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">');
+      $("#add-option-button").css("display","none");
+      $("#save-button").css("display","none");
+    })
+
+    function addNewQuestion(val){
+      if(val!="")
+      {
+        $("#add-option-button").css("display","block");
+        $("#save-button").css("display","block");
+      }    
+    }
+
+    $("#save-button").on("click",function(){
+      $.ajax({
+        type: 'post',
+        data: $("form").serialize(),
+        url: "<%= questions_path %>"
+      });
+    })
+    $("#save-button-fillups").on("click",function(){
+      $("#question").val($("#before_question").val()+"______________"+$("#after_question").val())
+      $.ajax({
+        type: 'post',
+        data: $("form").serialize(),
+        url: "<%= questions_path %>"
+      });
+    })
+</script>
+

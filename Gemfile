@@ -59,5 +59,3 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "devise"
 gem 'activerecord-import'
 gem "font-awesome-rails"
-
-gem "pg", "~> 1.3"

@@ -3,12 +3,38 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-3xl uppercase text-gray-500">Questions</h1>
-    <%= link_to 'New question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
+  
+    <div class="flex justify-between items-center w-full">
+      <h1 class="font-bold text-3xl uppercase text-gray-500">Questions</h1>
+      <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
+    </div>
+    <% if @questions.present? %>
+      <div class="pt-6 sm:pt-5">
+        <div role="group" aria-labelledby="label-notifications">
+          <div class="w-full">
+            <div id="questions" class="min-w-full">
+              <%= form_tag do%>
+                <%= render @questions %>
+                <button type="button" id="submit-answer-button" class="float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium">Submit</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
+<script>
+  $("#submit-answer-button").on("click",function() {
+    $.ajax({
+      type: 'post',
+      data: ("form").serialize(),
+      url: <%= create_question_path %>,
+      success: function() {
+        
+      }
+    })
 
-  <div id="questions" class="min-w-full">
-    <%= render @questions %>
-  </div>
-</div>
+  })
+</script>
+

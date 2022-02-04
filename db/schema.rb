@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_122342) do
+ActiveRecord::Schema.define(version: 2022_02_04_100927) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_122342) do
 
   create_table "questions", force: :cascade do |t|
     t.text "question"
-    t.string "options"
+    t.text "options"
     t.string "answer"
     t.integer "type_of_quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -68,12 +68,19 @@ ActiveRecord::Schema.define(version: 2022_02_03_122342) do
   end
 
   create_table "type_of_quizzes", force: :cascade do |t|
-    t.string "name"
     t.text "description"
     t.integer "quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "type_id"
     t.index ["quiz_id"], name: "index_type_of_quizzes_on_quiz_id"
+    t.index ["type_id"], name: "index_type_of_quizzes_on_type_id"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -105,4 +112,5 @@ ActiveRecord::Schema.define(version: 2022_02_03_122342) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "questions", "type_of_quizzes"
   add_foreign_key "type_of_quizzes", "quizzes"
+  add_foreign_key "type_of_quizzes", "types"
 end

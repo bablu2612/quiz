@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[ show edit update destroy ]
-
+  skip_before_action :verify_authenticity_token, only: %i{create}
   # GET /questions or /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
   end
 
   # GET /questions/1 or /questions/1.json
@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
-    @type_of_quiz=TypeOfQuiz.find(params[:type_of_quiz])
+    @type_of_quiz_name=TypeOfQuiz.find(params[:type_of_quiz]).type.name
   end
 
   # GET /questions/1/edit
@@ -22,17 +22,33 @@ class QuestionsController < ApplicationController
 
   # POST /questions or /questions.json
   def create
-    @question = Question.new(question_params)
+    # @question = Question.new(question_params)
 
-    respond_to do |format|
-      if @question.save
-        format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
-        format.json { render :show, status: :created, location: @question }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    # respond_to do |format|
+    #   if @question.save
+    #     format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
+    #     format.json { render :show, status: :created, location: @question }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @question.errors, status: :unprocessable_entity }
+    #   end
+    # end
+
+    question=params[:question]
+    correct_answer=params[:correct_answer]
+    type_of_quiz=params[:type_of_quiz]
+    i=1
+    options=[]
+    while(!params["option#{i}"].nil?)
+      options<<params["option#{i}"]
+      i=i+1
     end
+    Question.create({question:question,options:options,answer:correct_answer,type_of_quiz_id:type_of_quiz})
+    redirect_to type_of_quizzes_path(quiz_id: TypeOfQuiz.find(type_of_quiz).quiz_id), notice: "Question was successfully added."
+  end
+
+  def create_question
+    Question.all
   end
 
   # PATCH/PUT /questions/1 or /questions/1.json
