@@ -16,7 +16,10 @@
               <%= form_tag do%>
                 <%= render @questions %>
                 <button type="button" id="submit-answer-button" class="hidden float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium">Submit</button>
-              <% end %>
+                <button type="button" id="submit-answer-button" class="hidden float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium">Back</button>
+                <%= link_to "Back", type_of_quizzes_path(quiz_id: 1),class: "float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium" %>
+
+                <% end %>
             </div>
           </div>
         </div>
