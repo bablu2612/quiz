@@ -60,3 +60,9 @@ gem 'activerecord-import'
 gem "font-awesome-rails"
 
 gem "pg", "~> 1.3"
+
+gem "roo", "~> 2.8"
+
+gem "spreadsheet", "~> 1.3"
+
+gem "roo-xls", "~> 1.2"
