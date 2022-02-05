@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   get 'create_question',to: 'questions#create_question'
 
   get 'students',to: 'students#index'
+  post '/type_of_quizzes/:id/upload',to: 'type_of_quizzes#upload'
+  get '/students/quiz/:type_of_quiz',to: 'students#show_quiz'
+  post '/student/result',to: 'students#result'
+
+  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

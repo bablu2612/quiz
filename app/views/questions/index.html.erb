@@ -3,10 +3,44 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
+
+
+
+
+
+
+<div class="mt-2">
+
+  <%= form_with(model: @image_upload, class: "contents") do |form| %>
+   
+  
+
+    <div class="my-5">
+    <%= form.label :upload_excel %>
+    <%= form.file_field :upload_excel %>
+    <%= hidden_field_tag 'type_of_quiz', params[:type_of_quiz]  %>
+
+  
+    </div>
+
+    <button type="submit" id="submit-answer-button" class="mb-5float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium">Uploads</button>
+
+  
+  <% end %>
+  
+</form>
+
+</div>
+
+
+
+
+
+  
   
     <div class="flex justify-between items-center w-full">
       <h1 class="font-bold text-3xl uppercase text-gray-500">Questions</h1>
-      <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
+      <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: " rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
     </div>
     <% if @questions.present? %>
       <div class="pt-6 sm:pt-5">

@@ -7,11 +7,11 @@
         <%= question.question %>
       </p>
       <div class="mt-4 space-y-4 mb-6">
-      <% if TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Fill ups"%>
+      <% if TypeOfQuiz.find(params[:id]).type.name == "Fill ups"%>
       Fill sentence : <input type="text" name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
-      <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Jumbled Words" %>
+      <% elsif TypeOfQuiz.find(params[:id]).type.name == "Jumbled Words" %>
       correct sequence : <input type="text" name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
-      <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Mid-text-selecter" %>
+      <% elsif TypeOfQuiz.find(params[:id]).type.name == "Mid-text-selecter" %>
       <div class="flex items-center mb-2">
       <select name="correct-answer<%= question.id %>" >
         <% question.options.each do |option| %>
@@ -20,7 +20,7 @@
         </select>
         </div>
 
-      <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Select one" %>
+      <% elsif TypeOfQuiz.find(params[:id]).type.name == "Select one" %>
       <div class="flex items-center mb-2">
       <select name="correct-answer<%= question.id %>" >
         <% question.options.each do |option| %>
@@ -32,7 +32,7 @@
       <% else %>
         <% question.options.each do |option| %>
           <div class="flex items-center mb-2">
-            <input id="<%= index %><%=option %>" value="<%= option %>,<%= question.id %>" name="selected_ans<%= index+1 %>" type="radio" class="focus:ring-cyan-500 h-4 w-4 text-cyan-600 border-gray-300">
+            <input id="<%= index %><%=option %>" name="correct-answer<%= question.id %>" type="radio" class="focus:ring-cyan-500 h-4 w-4 text-cyan-600 border-gray-300">
             <label for="<%= index %><%=option %>" class="ml-3 block text-sm font-medium text-gray-700"><%= option %></label>
           </div>
         <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_083102) do
+ActiveRecord::Schema.define(version: 2022_02_05_173115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 2022_02_05_083102) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "title"
+    t.string "descriptions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "question"
     t.text "options"
@@ -67,6 +74,17 @@ ActiveRecord::Schema.define(version: 2022_02_05_083102) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["type_of_quiz_id"], name: "index_questions_on_type_of_quiz_id"
+  end
+
+  create_table "quiz_results", force: :cascade do |t|
+    t.string "question"
+    t.string "options"
+    t.string "submited_ans"
+    t.string "correct_ans"
+    t.string "type_id"
+    t.string "notification_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "quizzes", force: :cascade do |t|

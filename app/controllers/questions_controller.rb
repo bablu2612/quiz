@@ -2,14 +2,30 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token, only: %i{create}
   # GET /questions or /questions.json
+  require 'roo'
+  require 'spreadsheet'
   def index
     @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
+    @image_upload = ImageUpload.new
+
   end
 
   # GET /questions/1 or /questions/1.json
   def show
   end
 
+  def upload
+    data= ImageUpload.import(params[:upload_excel])
+    # data.default_sheet = 'Sheet 3'
+ 
+    data.each(id: 'ID', name: 'FULL_NAME') do |hash|
+     puts hash.inspect
+     # => { id: 1, name: 'John Smith' }
+   end
+   
+ abort('here')
+    abort('hhh')
+  end
   # GET /questions/new
   def new
     @question = Question.new

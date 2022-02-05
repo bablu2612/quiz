@@ -1,0 +1,45 @@
+<div class="w-full mt-5 bg-white py-4 px-4">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+
+
+    <div class="flex justify-between items-center w-full">
+      <h1 class="font-bold text-3xl uppercase text-gray-500">Questions12</h1>
+      <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "hidden rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
+    </div>
+    <% if @questions.present? %>
+      <div class="pt-6 sm:pt-5">
+        <div role="group" aria-labelledby="label-notifications">
+          <div class="w-full">
+            <div id="questions" class="min-w-full">
+              <%= form_tag('' ,{class: 'form'}) do%>
+                <%= render @questions %>
+                <button type="button" id="submit1-answer-button" class="check_result float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium mb-4 mt-2">Submit</button>
+                
+                <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
+<script>
+console.log('here1')
+
+  $(".check_result").on("click",function() {
+      console.log('here')
+    $.ajax({
+      type: 'post',
+      data: $("form").serialize(),
+      url: '/student/result',
+      success: function(data) {
+        console.log(data)
+      }
+    })
+
+  })
+</script>
+
