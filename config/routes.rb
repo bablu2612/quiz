@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+
   resources :image_uploads
   resources :questions
   resources :type_of_quizzes
   resources :quizzes
   get 'home', to: 'static_pages#home'
+  get 'teacher', to: 'static_pages#home'
+  root 'static_pages#home'
+
+  
   devise_for :views
   devise_for :users
-  root 'static_pages#home'
   get 'create_question',to: 'questions#create_question'
 
   get 'students',to: 'students#index'
@@ -19,6 +23,8 @@ Rails.application.routes.draw do
   get '/quiz/:id/result',to: 'quiz_result#index'
   get '/notification/:id/result',to: 'quiz_result#show_result'
 
+
+  
   # result_notification
 
 
