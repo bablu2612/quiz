@@ -6,26 +6,40 @@
 
 
     <div class="flex justify-between items-center w-full">
-      <h1 class="font-bold text-3xl uppercase text-gray-500">Questions12</h1>
+      <h1 class="font-bold text-3xl uppercase text-gray-500">Questions</h1>
       <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "hidden rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
     </div>
     <% if @questions.present? %>
+
       <div class="pt-6 sm:pt-5">
+
         <div role="group" aria-labelledby="label-notifications">
+  
           <div class="w-full">
+
             <div id="questions" class="min-w-full">
+
               <%= form_tag('' ,{class: 'form'}) do%>
-                <%= render @questions %>
                 <button type="button" id="submit1-answer-button" class="check_result float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium mb-4 mt-2">Submit</button>
-                
+
+                <% @questions.each do |question| %>
+
+                   <%= render partial: "question", locals: {question: question} %>
+
                 <% end %>
+
+               <% end %>
+
             </div>
           </div>
         </div>
       </div>
     </div>
+
   <% end %>
-  
+
+  </div>
+
 <script>
 console.log('here1')
 
@@ -41,5 +55,13 @@ console.log('here1')
     })
 
   })
+
+
+  $(".fillups_options").focusout(function(){
+  var id= $(this).attr("id");
+  var value=$(this).val();
+  $('.'+id).val(value+','+id);
+  console.log(id,value)
+});
 </script>
 

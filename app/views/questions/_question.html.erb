@@ -21,13 +21,17 @@
         </div>
 
       <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Select one" %>
-      <div class="flex items-center mb-2">
-      <select name="correct-answer<%= question.id %>" >
-        <% question.options.each do |option| %>
-            <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>" class="focus:ring-cyan-500 h-4 w-4 text-cyan-600 border-gray-300"><%= option %></option>
-        <% end %>
-        </select>
-        </div>
+    
+      <div>
+      <label for="location" class="block text-sm font-medium text-gray-700">Select</label>
+      <select id="location" name="correct-answer<%= question.id %>" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+      <% question.options.each do |option| %>
+        <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>"><%= option %></option>
+    <% end %>
+     
+    </div>
+    
+     
 
       <% else %>
         <% question.options.each do |option| %>

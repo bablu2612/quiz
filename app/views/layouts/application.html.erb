@@ -75,6 +75,15 @@
                 </svg>
                 Home
               </a>
+              <%= link_to quizzes_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
+                Quizzes
+              <% end %>
+
+              <%= link_to quiz_result_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
+                Quiz Result
+              <% end %>
             </div>
             <div class="mt-6 pt-6">
               <div class="px-2 space-y-1">
@@ -107,6 +116,11 @@
               <%= link_to quizzes_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
                 <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
                 Quizzes
+              <% end %>
+
+              <%= link_to quiz_result_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
+                Quiz Result
               <% end %>
             </div>
             <div class="mt-6 pt-6">

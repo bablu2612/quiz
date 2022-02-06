@@ -14,6 +14,14 @@ Rails.application.routes.draw do
   get '/students/quiz/:type_of_quiz',to: 'students#show_quiz'
   post '/student/result',to: 'students#result'
 
+
+  get '/quiz/result',to: 'quiz_result#index'
+  get '/quiz/:id/result',to: 'quiz_result#index'
+  get '/notification/:id/result',to: 'quiz_result#show_result'
+
+  # result_notification
+
+
   
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
