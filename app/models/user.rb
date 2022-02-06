@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role:{
-    admin: "admin",
+    teacher: "teacher",
     student: "student"
   }
+  # enum role: { student: 0, admin: 1 } 
+
 end

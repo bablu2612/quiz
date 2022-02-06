@@ -1,9 +1,19 @@
 class StudentsController < ApplicationController
+    before_action :check_is_login
+    def check_is_login
+        if user_signed_in?
+        else
+        redirect_to user_session_path
+        end
+      end
+
     def index
-        @types=Type.all
-
-        render layout: "student"
-
+        if current_user.role == "student"
+            @types=Type.all
+            render layout: "student"
+          else
+            redirect_to '/teacher'
+          end
     end
 
     def show_quiz

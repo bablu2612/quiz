@@ -5,12 +5,17 @@ Rails.application.routes.draw do
   resources :type_of_quizzes
   resources :quizzes
   get 'home', to: 'static_pages#home'
-  get 'teacher', to: 'static_pages#home'
+  get 'teacher', to: 'static_pages#show'
   root 'static_pages#home'
+  # root 'devise/sessions#new'
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
   
+  
   devise_for :views
-  devise_for :users
+  # devise_for :users
   get 'create_question',to: 'questions#create_question'
 
   get 'students',to: 'students#index'
