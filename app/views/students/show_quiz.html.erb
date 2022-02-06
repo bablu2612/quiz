@@ -3,6 +3,8 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice_succ"></p>
+
 
 
     <div class="flex justify-between items-center w-full">
@@ -50,7 +52,9 @@ console.log('here1')
       data: $("form").serialize(),
       url: '/student/result',
       success: function(data) {
-        console.log(data)
+        console.log('good for health')
+        $('#notice_succ').html(data.message);
+
       }
     })
 
