@@ -10,6 +10,10 @@ $(document).ready(function() {
   
     setInterval(dateTime, 1000);
   });
+
+  $(".side-nav-button").on("click",function(){
+    $(".side-nav,.background-side-nav").toggle();
+  })
   
   Number.prototype.leadingZeroes = function(len) {
     return (new Array(len).fill('0', 0).join('') + this).slice(-Math.abs(len));

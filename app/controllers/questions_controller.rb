@@ -34,6 +34,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
+    @type_of_quiz_name=TypeOfQuiz.find(params[:type_of_quiz]).type.name
   end
 
   # POST /questions or /questions.json
@@ -78,6 +79,22 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_question
+    question_id=params[:question_id]
+    question=params[:question]
+    correct_answer=params[:correct_answer]
+    type_of_quiz=params[:type_of_quiz]
+    i=1
+    options=[]
+    while(!params["option#{i}"].nil?)
+      options<<params["option#{i}"]
+      i=i+1
+    end
+    question_to_update=Question.find(question_id)
+    question_to_update.update(question:question,options:options,answer:correct_answer,type_of_quiz_id:type_of_quiz)
+    redirect_to questions_url(type_of_quiz: params[:type_of_quiz]), notice: "Question was successfully updated."
   end
 
   # DELETE /questions/1 or /questions/1.json

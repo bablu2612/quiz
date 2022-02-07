@@ -1,4 +1,4 @@
-<div class="w-full mt-5 bg-white py-4 px-4">
+<div class="mx-auto mt-5 bg-white py-4 px-4 ml-8 mr-8 text-gray-700 px-8 py-8">
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
@@ -8,7 +8,7 @@
 
 
     <div class="flex justify-between items-center w-full">
-      <h1 class="font-bold text-3xl uppercase text-gray-500">Questions</h1>
+      <h1 class="font-bold text-3xl uppercase text-gray-500"><%= TypeOfQuiz.find(params[:type_of_quiz]).type.name.humanize %> Questions</h1>
       <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "hidden rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
     </div>
     <% if @questions.present? %>
@@ -22,15 +22,14 @@
             <div id="questions" class="min-w-full">
 
               <%= form_tag('' ,{class: 'form'}) do%>
-                <button type="button" id="submit1-answer-button" class="check_result float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium mb-4 mt-2">Submit</button>
-
                 <% @questions.each do |question| %>
 
                    <%= render partial: "question", locals: {question: question} %>
 
                 <% end %>
-
-               <% end %>
+                <%= hidden_field_tag :type_of_quiz,params[:type_of_quiz]%>
+                <button type="button" id="submit1-answer-button" class="check_result mt-8 w-full rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium">Submit</button>
+              <% end %>
 
             </div>
           </div>

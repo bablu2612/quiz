@@ -23,7 +23,7 @@
 
           <div class="min-h-full">
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-      <div class="fixed inset-0 flex z-40 lg:hidden" role="dialog" aria-modal="true">
+      <div class="background-side-nav fixed inset-0 flex z-40 lg:hidden" role="dialog" aria-modal="true">
         <!--
           Off-canvas menu overlay, show/hide based on off-canvas menu state.
 
@@ -34,7 +34,7 @@
             From: "opacity-100"
             To: "opacity-0"
         -->
-        <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
+        <div class="background-side-nav fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
 
         <!--
           Off-canvas menu, show/hide based on off-canvas menu state.
@@ -46,7 +46,7 @@
             From: "translate-x-0"
             To: "-translate-x-full"
         -->
-        <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-cyan-700">
+        <div class="side-nav relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-cyan-700">
           <!--
             Close button, show/hide based on off-canvas menu state.
 
@@ -58,7 +58,7 @@
               To: "opacity-0"
           -->
           <div class="absolute top-0 right-0 -mr-12 pt-2">
-            <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            <button type="button" class="side-nav-button ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
               <span class="sr-only">Close sidebar</span>
               <!-- Heroicon name: outline/x -->
               <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -73,13 +73,10 @@
           <nav class="mt-5 flex-shrink-0 h-full divide-y divide-cyan-800 overflow-y-auto" aria-label="Sidebar">
             <div class="px-2 space-y-1">
               <!-- Current: "bg-cyan-800 text-white", Default: "text-cyan-100 hover:text-white hover:bg-cyan-600" -->
-              <a href="#" class="bg-cyan-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md" aria-current="page">
-                <!-- Heroicon name: outline/home -->
-                <svg class="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
+              <%= link_to root_url, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-home" style="font-size:22px"></i>&ensp;&ensp;
                 Home
-              </a>
+              <% end %>
               <%= link_to quizzes_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
                 <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
                 Quizzes
@@ -87,7 +84,7 @@
 
               <%= link_to quiz_result_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
                 <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
-                Quiz Result
+                Quiz Result Notification
               <% end %>
             </div>
             <div class="mt-6 pt-6">
@@ -124,8 +121,8 @@
               <% end %>
 
               <%= link_to quiz_result_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
-                <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
-                Quiz Result
+                <i class="fa fa-bell" style="font-size:22px"></i>&ensp;&ensp;
+                Quiz Result Notification
               <% end %>
             </div>
             <div class="mt-6 pt-6">
@@ -139,7 +136,7 @@
 
       <div class="lg:pl-64 flex flex-col flex-1">
         <div class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:border-none">
-          <button type="button" class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden">
+          <button type="button" class="side-nav-button px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden">
             <span class="sr-only">Open sidebar</span>
             <!-- Heroicon name: outline/menu-alt-1 -->
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -151,7 +148,7 @@
             <div class="flex-1 flex">
             </div>
             <div class="ml-4 flex items-center md:ml-6">
-              <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+              <button type="button" class="hidden bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
                 <span class="sr-only">View notifications</span>
                 <!-- Heroicon name: outline/bell -->
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -162,10 +159,10 @@
               <!-- Profile dropdown -->
               <div class="ml-3 relative">
                 <% if user_signed_in? %>
-                  Welcome <%= current_user.email.humanize %>
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" %>
+                  
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent hover:shadow-xl" %>
                 <% else %>
-                  <%= link_to "Log In",user_session_path %>
+                  <%= link_to "Log In",user_session_path,class: "bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent hover:shadow-xl" %>
                 <% end %>
               </div>
             </div>
@@ -190,10 +187,8 @@
                         <dt class="sr-only">Company</dt>
                         <dd class="flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
                           <!-- Heroicon name: solid/office-building -->
-                          <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />
-                          </svg>
-                          Duke street studio
+                          <i class="fa fa-user mr-2"style="font-size:20px"></i>
+                          <%= current_user.email %>
                         </dd>
                         <dt class="sr-only">Account status</dt>
                         <dd class="mt-3 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
@@ -208,7 +203,7 @@
                   </div>
                 </div>
                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
-                  <%= link_to "Add test",new_quiz_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" %>
+                  <%= link_to "Add test",new_quiz_path, class: "float-left bg-transparent hover:bg-cyan-700 text-cyan-600 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent hover:shadow-xl" %>
                 </div>
               </div>
             </div>

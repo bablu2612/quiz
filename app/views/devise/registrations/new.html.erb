@@ -16,34 +16,37 @@
             <div class="space-y-1">
               <%= f.label :email, class:"block text-sm font-medium text-gray-700" %>
               <div class="mt-1">
-                <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" %>
               </div>
             </div>
 
             <div class="space-y-1">
               <%= f.label :password, class:"block text-sm font-medium text-gray-700" %>
                 <em class="text-red-600">(<%= @minimum_password_length %> characters minimum)</em>
-                <%= f.password_field :password, autocomplete: "current-password", class:"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                <%= f.password_field :password, autocomplete: "current-password", class:"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" %>
             </div>
             
 
             <div class="space-y-1">
               <%= f.label :password_confirmation, class:"block text-sm font-medium text-gray-700"%>
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" %>
             </div>
             <div class="space-y-1">
             <%= f.label :role %>
             <%= f.select :role, User.roles.keys %>
             </div>
             <div class="actions space-y-1">
-              <%= f.submit "Sign up",class:"w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+              <%= f.submit "Sign up",class:"w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" %>
             </div>
             <p class="mt-2 text-sm text-gray-600">
-            <%= link_to "Already registered? Login",user_session_path, class: "font-medium text-indigo-600 hover:text-indigo-500"%>
+            <%= link_to "Already registered? Login",user_session_path, class: "font-medium text-cyan-600 hover:text-cyan-500"%>
           </p>
           <% end %>
         </div>
       </div>
     </div>
+  </div>
+  <div class="hidden lg:block relative w-0 flex-1">
+    <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80" alt="">
   </div>
 </div>

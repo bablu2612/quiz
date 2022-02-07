@@ -17,8 +17,9 @@ Rails.application.routes.draw do
   devise_for :views
   # devise_for :users
   get 'create_question',to: 'questions#create_question'
-
+  post 'update_question', to:"questions#update_question"
   get 'students',to: 'students#index'
+  get 'test_result' ,to: 'students#test_result'
   post '/type_of_quizzes/:id/upload',to: 'type_of_quizzes#upload'
   get '/students/quiz/:type_of_quiz',to: 'students#show_quiz'
   post '/student/result',to: 'students#result'

@@ -1,3 +1,7 @@
+<%= link_to 'Back', questions_path(type_of_quiz: params[:type_of_quiz]), class: "float-left ml-5 mt-5 bg-transparent hover:bg-green-700 text-green-800 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent rounded" %>
+<%= render 'questions/form' %>
+
+<!--<%= link_to 'Back', questions_path(type_of_quiz: params[:type_of_quiz]), class: "float-left ml-5 mt-5 bg-transparent hover:bg-green-700 text-green-800 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent rounded" %>
 <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl">Editing question</h1>
 

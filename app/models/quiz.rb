@@ -4,7 +4,8 @@ class Quiz < ApplicationRecord
     after_create :create_type_of_quiz
 
     def create_type_of_quiz()
-        data=[[1,id],[2,id],[3,id],[4,id]]
+        quiz_id=id
+        data=Type.all.map{|type| [type.id,quiz_id]}
         columns=[:type_id, :quiz_id]
         TypeOfQuiz.import columns,data
     end
