@@ -687,10 +687,6 @@ select {
   right: 0px;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
 .-left-1 {
   left: -0.25rem;
 }
@@ -699,12 +695,8 @@ select {
   top: -0.25rem;
 }
 
-.left-1 {
-  left: 0.25rem;
-}
-
-.top-1 {
-  top: 0.25rem;
+.bottom-0 {
+  bottom: 0px;
 }
 
 .z-40 {
@@ -846,10 +838,6 @@ select {
   margin-top: 2rem;
 }
 
-.-ml-10 {
-  margin-left: -2.5rem;
-}
-
 .ml-8 {
   margin-left: 2rem;
 }
@@ -958,10 +946,6 @@ select {
   width: 2rem;
 }
 
-.w-9 {
-  width: 2.25rem;
-}
-
 .w-0 {
   width: 0px;
 }
@@ -1008,6 +992,10 @@ select {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.table-auto {
+  table-layout: auto;
 }
 
 .-translate-x-full {
@@ -1244,9 +1232,9 @@ select {
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
-.bg-gray-300 {
+.bg-gray-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
 .bg-cyan-600 {
@@ -1254,26 +1242,13 @@ select {
   background-color: rgb(8 145 178 / var(--tw-bg-opacity));
 }
 
-.bg-indigo-600 {
+.bg-red-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
-}
-
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
-}
-
-.bg-contain {
-  background-size: contain;
-}
-
-.bg-no-repeat {
-  background-repeat: no-repeat;
 }
 
 .fill-current {
@@ -1412,10 +1387,6 @@ select {
 
 .text-right {
   text-align: right;
-}
-
-.align-top {
-  vertical-align: top;
 }
 
 .align-middle {
@@ -1573,11 +1544,6 @@ select {
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
-.text-indigo-600 {
-  --tw-text-opacity: 1;
-  color: rgb(79 70 229 / var(--tw-text-opacity));
-}
-
 .placeholder-gray-400::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(156 163 175 / var(--tw-placeholder-opacity));
@@ -1622,12 +1588,6 @@ select {
 .shadow-inner {
   --tw-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: inset 0 2px 4px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-sm {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1729,12 +1689,6 @@ select {
 .hover\:text-cyan-500:hover {
   --tw-text-opacity: 1;
   color: rgb(6 182 212 / var(--tw-text-opacity));
-}
-
-.hover\:shadow-xl:hover {
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .hover\:shadow-xl:hover {

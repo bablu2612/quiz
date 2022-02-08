@@ -21,9 +21,7 @@ class QuizzesController < ApplicationController
 
   # POST /quizzes or /quizzes.json
   def create
-    if Quiz.all.length >= 1
-      redirect_to quizzes_path, notice: "Already created"
-    else
+   
       @quiz = Quiz.new(quiz_params)
 
       respond_to do |format|
@@ -35,7 +33,7 @@ class QuizzesController < ApplicationController
           format.json { render json: @quiz.errors, status: :unprocessable_entity }
         end
       end
-    end
+    
   end
 
   def activate_quiz
