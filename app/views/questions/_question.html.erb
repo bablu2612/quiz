@@ -2,45 +2,46 @@
   <% index=@questions.find_index(question) %>
   <div class="w-full px-8 py-4">
     <div class="max-w-lg">
+      <br>
       <p class="text-xl text-gray-600">
         Q<%= index+1 %>.&ensp;
         <%= question.question %>
       </p>
       <div class="mt-4 space-y-4 mb-6">
-      <% if TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Fill ups"%>
-      Fill sentence : <input type="text" name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
-      <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Jumbled Words" %>
-      correct sequence : <input type="text" name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
-      <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Mid-text-selecter" %>
-      <div class="flex items-center mb-2">
-      <select name="correct-answer<%= question.id %>" >
-        <% question.options.each do |option| %>
-            <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>" class="focus:ring-cyan-500 h-4 w-4 text-cyan-600 border-gray-300"><%= option %></option>
-        <% end %>
-        </select>
+        <% if TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Fill ups"%>
+        Fill sentence : <input type="text" name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
+        <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Jumbled Words" %>
+        correct sequence : <input type="text" name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
+        <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Mid-text-selecter" %>
+        <div class="flex items-center mb-2">
+          <select name="correct-answer<%= question.id %>" >
+            <% question.options.each do |option| %>
+                <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>" class="focus:ring-cyan-500 h-4 w-4 text-cyan-600 border-gray-300"><%= option %></option>
+            <% end %>
+          </select>
         </div>
 
-      <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Select one" %>
-    
-      <div>
-      <label for="location" class="block text-sm font-medium text-gray-700">Select</label>
-      <select id="location" name="correct-answer<%= question.id %>" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-      <% question.options.each do |option| %>
-        <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>"><%= option %></option>
-    <% end %>
-     
-    </div>
-    
-     
-
-      <% else %>
-        <% question.options.each do |option| %>
-          <div class="flex items-center mb-2">
-            <input id="<%= index %><%=option %>" value="<%= option %>,<%= question.id %>" name="selected_ans<%= index+1 %>" type="radio" class="focus:ring-cyan-500 h-4 w-4 text-cyan-600 border-gray-300">
-            <label for="<%= index %><%=option %>" class="ml-3 block text-sm font-medium text-gray-700"><%= option %></label>
+        <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Select one" %>    
+          <div>
+            <label for="location" class="block text-sm font-medium text-gray-700">Select</label>
+            <select id="location" name="correct-answer<%= question.id %>" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+            <% question.options.each do |option| %>
+              <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>"><%= option %></option>
+            <% end %>     
           </div>
+      
+        <% else %>
+          <% question.options.each do |option| %>
+            <div class="flex items-center mb-2">
+              <input id="<%= index %><%=option %>" value="<%= option %>,<%= question.id %>" name="selected_ans<%= index+1 %>" type="radio" class="focus:ring-cyan-500 h-4 w-4 text-cyan-600 border-gray-300">
+              <label for="<%= index %><%=option %>" class="ml-3 block text-sm font-medium text-gray-700"><%= option %></label>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+        <div class="w-full">
+          <!-- <%= link_to 'Edit',edit_question_path(id: question.id,type_of_quiz: question.type_of_quiz.id,edit:'true',question_id: question.id), class: "float-left bg-transparent hover:bg-cyan-700 text-cyan-600 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent rounded" %>
+          <%= link_to 'Delete',question_path(question, type_of_quiz:params[:type_of_quiz]),method: :delete,data: {confirm: "Are you sure"} ,class: "float-left ml-5 bg-transparent hover:bg-red-500 text-red-600 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" %>-->
+        </div>
       </div>
     </div>
   </div>

@@ -30,8 +30,12 @@
           <tbody class="bg-white divide-y divide-gray-200">
           
             <% @notifications.each do |notification| %>
+                <% if notification.readed == true %>
+                  <tr>
+                <% else %>
+                  <tr style="background: #efefef;">
+                <% end %>
                 
-                <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <%= notification.title %>
                     </td>

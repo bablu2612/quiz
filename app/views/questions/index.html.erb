@@ -37,7 +37,6 @@
     </div>
   </div> 
   <% end %>
-  </form>
 
 <!--
 <div class="mt-2">
@@ -97,7 +96,7 @@
     $.ajax({
       type: 'post',
       data: ("form").serialize(),
-      url: <%= create_question_path %>,
+      url: "<%= create_question_path %>",
       success: function() {
         
       }

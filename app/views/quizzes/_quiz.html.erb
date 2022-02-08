@@ -11,8 +11,43 @@
     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
       <%= quiz.description %>
     </td>
+    <td>    
+      <label class="hidden flex items-center cursor-pointer ml-8" onclick="activate_quiz(<%= quiz.id %>)">
+        <!-- toggle -->
+        <div class="relative">
+          <!-- input -->
+          <% if quiz.active == true %>            
+            <input id="toogleA" name="activate" checked="true" type="radio" class="sr-only" />
+          <% else %>
+            <input id="toogleA" name="activate" type="radio" class="sr-only" />
+          <% end %>          
+          <!-- line -->
+          <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+          <!-- dot -->
+          <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+        </div>
+      </label>
+    </td>
     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <%= link_to "Edit",edit_quiz_path(quiz),class:"inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"%>
       <%= link_to "Details",type_of_quizzes_path(quiz_id: quiz.id),class:"inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"%>
     </td>
   </tr>
 </div>
+<style>
+  /* Toggle A */
+  input[type="radio"]:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #06b6d4;
+  }
+</style>
+<script>
+  function activate_quiz(quiz_id){
+    $.ajax({
+      type: "get",
+      data: "quiz_id="+quiz_id,
+      url: "<%= activate_quiz_path %>"
+    })    
+  }
+</script>
+

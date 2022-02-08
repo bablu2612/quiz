@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :type_of_quizzes
   resources :quizzes
+  get 'activate_quiz', to: 'quizzes#activate_quiz'
   get 'home', to: 'static_pages#home'
   get 'teacher', to: 'static_pages#show'
   root 'static_pages#home'
@@ -17,10 +18,11 @@ Rails.application.routes.draw do
   devise_for :views
   # devise_for :users
   get 'create_question',to: 'questions#create_question'
-
+  post 'update_question', to:"questions#update_question"
   get 'students',to: 'students#index'
+  get 'test_result' ,to: 'students#test_result'
   post '/type_of_quizzes/:id/upload',to: 'type_of_quizzes#upload'
-  get '/students/quiz/:type_of_quiz',to: 'students#show_quiz'
+  get 'show_quiz',to: 'students#show_quiz'
   post '/student/result',to: 'students#result'
 
 

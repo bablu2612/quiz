@@ -10,6 +10,7 @@ class StudentsController < ApplicationController
     def index
         if current_user.role == "student"
             @types=Type.all
+            @type_of_quiz=TypeOfQuiz.where(quiz_id: Quiz.where(active: 1).first.id)
             render layout: "student"
           else
             redirect_to '/teacher'
@@ -17,14 +18,14 @@ class StudentsController < ApplicationController
     end
 
     def show_quiz
-        @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
+        @questions = Question.where(type_of_quiz_id: params[:type_of_quiz]).shuffle
 
         render layout: "student"
 
     end
 
     def result
-        @notification=Notification.create title:"test" , descriptions: "test descriptions"
+        @notification=Notification.create title:"test" , descriptions: "#{current_user.email} has given #{TypeOfQuiz.find(params[:type_of_quiz]).quiz.title}"
         i=1
         while(!params["selected_ans#{i}"].nil?)
             answer=params["selected_ans#{i}"].split(',')
@@ -41,6 +42,21 @@ class StudentsController < ApplicationController
             @quiz_res.save
             i=i+1
         end
-       render json: {"message": "Quiz was submited successfully "}.to_json
+        redirect_to test_result_path(notification:@notification.id)       
+    end 
+    def test_result
+        quiz_result=Notification.find(params[:notification]).quiz_results
+        @score=0
+        @result=Array.new   
+        quiz_result.each_with_index  do |quiz,index|            
+           
+            if  quiz.correct_ans == quiz.submited_ans
+                @result << ["Q#{index+1}","Correct"]
+                @score = @score+1
+            else
+                @result<<["Q#{index+1}","Incorrect","Correct answer was #{quiz.correct_ans}"]
+            end
+        end
+        render layout: 'student'
     end
 end

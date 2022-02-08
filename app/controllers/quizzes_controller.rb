@@ -3,7 +3,7 @@ class QuizzesController < ApplicationController
 
   # GET /quizzes or /quizzes.json
   def index
-    @quizzes = Quiz.all
+    @quizzes = Quiz.all.order('created_at')
   end
 
   # GET /quizzes/1 or /quizzes/1.json
@@ -21,17 +21,26 @@ class QuizzesController < ApplicationController
 
   # POST /quizzes or /quizzes.json
   def create
-    @quiz = Quiz.new(quiz_params)
+    if Quiz.all.length >= 1
+      redirect_to quizzes_path, notice: "Already created"
+    else
+      @quiz = Quiz.new(quiz_params)
 
-    respond_to do |format|
-      if @quiz.save
-        format.html { redirect_to quizzes_path, notice: "Quiz was successfully created." }
-        format.json { render :show, status: :created, location: @quiz }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @quiz.save
+          format.html { redirect_to quizzes_path, notice: "Quiz was successfully created." }
+          format.json { render :show, status: :created, location: @quiz }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @quiz.errors, status: :unprocessable_entity }
+        end
       end
     end
+  end
+
+  def activate_quiz
+    Quiz.update_all(active: 0)
+    Quiz.find(params[:quiz_id]).update(active: 1)
   end
 
   # PATCH/PUT /quizzes/1 or /quizzes/1.json
