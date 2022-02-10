@@ -23,4 +23,19 @@ class StaticPagesController < ApplicationController
   end
 
 
+  def upload_detail
+ @typedetails=TypeOfQuiz.find(params[:quiz_id])
+
+ @typename= @typedetails.type.name
+
+@upload_details={
+  "type" => @typename,
+  "image_url" => "uploadhelp/"+type_of_quiz.type.name+".png",
+  "message" => 'required'
+}
+
+abort('jj')
+
+  end
+
 end

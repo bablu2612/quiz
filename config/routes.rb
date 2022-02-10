@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   get 'activate_quiz', to: 'quizzes#activate_quiz'
   get 'home', to: 'static_pages#home'
   get 'teacher', to: 'static_pages#show'
+
+  get 'upload_detail', to: 'static_pages#upload_detail'
+
+
+  
   root 'static_pages#home'
   # root 'devise/sessions#new'
   devise_for :users, controllers: {

@@ -18,7 +18,8 @@ class StudentsController < ApplicationController
     end
 
     def show_quiz
-        @questions = Question.where(type_of_quiz_id: params[:type_of_quiz]).shuffle
+        @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
+        @type_of_quiz=TypeOfQuiz.where(quiz_id: Quiz.where(active: 1).first.id)
 
         render layout: "student"
 
@@ -46,6 +47,8 @@ class StudentsController < ApplicationController
     end 
     def test_result
         quiz_result=Notification.find(params[:notification]).quiz_results
+        @type_of_quiz=TypeOfQuiz.where(quiz_id: Quiz.where(active: 1).first.id)
+
         @score=0
         @result=Array.new   
         quiz_result.each_with_index  do |quiz,index|            
