@@ -25,16 +25,22 @@ class StaticPagesController < ApplicationController
 
   def upload_detail
  @typedetails=TypeOfQuiz.find(params[:quiz_id])
-
  @typename= @typedetails.type.name
 
+ if @typename=="MCQ" || @typename=="Select one" || @typename=="midtext_select"
 @upload_details={
   "type" => @typename,
-  "image_url" => "uploadhelp/"+type_of_quiz.type.name+".png",
-  "message" => 'required'
+  "image_url" => "assets/uploadhelp/"+@typename+"1.png",
+  "message" => 'questions ,correct-answer,option1,option2,sooo on in same format'
 }
 
-abort('jj')
+else
+  @upload_details={
+    "type" => @typename,
+    "image_url" => "assets/uploadhelp/"+@typename+"1.png",
+    "message" => 'questions ,correct-answer'
+  }
+end
 
   end
 
