@@ -25,9 +25,20 @@
           <div>
             <label for="location" class="block text-sm font-medium text-gray-700">Select</label>
             <select id="location" name="correct-answer<%= question.id %>" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-            <% question.options.each do |option| %>
-              <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>"><%= option %></option>
-            <% end %>     
+              <% question.options.each do |option| %>
+                <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>"><%= option %></option>
+              <% end %>    
+            </select> 
+          </div>
+          
+         <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Mid text Selector" %>    
+          <div>
+            <label for="location" class="block text-sm font-medium text-gray-700">Select</label>
+            <select id="location" name="correct-answer<%= question.id %>" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <% question.options.each do |option| %>
+                <option id="<%= index %><%=option %>" name="correct-answer<%= question.id %>"><%= option %></option>
+              <% end %>  
+            </select>   
           </div>
       
         <% else %>

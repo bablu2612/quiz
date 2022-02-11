@@ -6,6 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-    data=[["MCQ"],["Fill ups"],["Select one"],["Jumbled Words"]]
-    Type.import [:name], data
-    
+data=[["MCQ"],["Fill ups"],["Select one"],["Jumbled Words"],["Mid text Selector"]]
+Type.import [:name], data

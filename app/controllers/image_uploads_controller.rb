@@ -48,8 +48,6 @@ class ImageUploadsController < ApplicationController
   # end
   
 
-
-
    data.each_with_index do |hash,index|
     if index != 0
     question=hash[0]

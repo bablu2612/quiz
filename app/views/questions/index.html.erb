@@ -9,11 +9,11 @@
 
   <%= form_with(model: @image_upload, class: "contents") do |form| %>
     <div class="flex justify-center mt-8">
-    <div class="rounded-lg shadow-xl bg-gray-50">
+    <div class="rounded-lg shadow-xl bg-gray-50  w-full mb-8">
         <div class="m-4">
             <label class="inline-block mb-2 text-gray-500">Upload Question</label>
             <p class="text-gray-500">Please select file that in (.xslx) format </p>
-            <%= link_to "click here for check instruction", upload_detail_path(quiz_id: params[:type_of_quiz]),class: "float-left" %>
+            <%= link_to "Click here for check instruction", upload_detail_path(quiz_id: params[:type_of_quiz]),class: "text-blue-600 float-left" %>
 
             <div class="flex items-center justify-center w-full">
                 <label
@@ -84,9 +84,10 @@
 
   })
 
-  $('input[type=file]').change(function() { 
-    $(".upload_ques").removeClass("cursor-not-allowed")
-    $('.selected_file').html('<b>file selected</b>'); 
+  $('input[type=file]').change(function(e) { 
+    $(".upload_ques").removeClass("cursor-not-allowed");
+    var file = e.target.files[0].name;
+    $('.selected_file').html('<b>'+file+'</b>'); 
 });
 </script>
 
