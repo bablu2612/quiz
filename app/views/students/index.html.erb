@@ -17,7 +17,13 @@
                    -->
                 </div>
                 <div class="ml-5 w-0 flex-1">
-                 <strong>MCQ</strong> 
+                 <strong>MCQ</strong>
+                 <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[0].id).quiz.id) %>
+                 <% if notific.present? %>
+                  (complited)
+                 <% else %>
+
+                 <% end %>
                 </div>
               </div>
             </div>
@@ -37,6 +43,12 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                 <strong>Select One</strong> 
+                <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[2].id).type_id) %>
+                <% if notific.present? %>
+                  (complited)
+                 <% else %>
+
+                 <% end %>
                </div>
               </div>
             </div>
@@ -56,6 +68,12 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                  <strong>Jumbled words</strong> 
+                 <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[3].id).type_id) %>
+                 <% if notific.present? %>
+                  (complited)
+                 <% else %>
+
+                 <% end %>
                 </div>
               </div>
             </div>
@@ -77,6 +95,12 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                  <strong>Fillups</strong> 
+                 <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[1].id).type_id) %>
+                 <% if notific.present? %>
+                  (complited)
+                 <% else %>
+
+                 <% end %>
                 </div>
               </div>
             </div>
@@ -96,6 +120,12 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                 <strong>Mid-Text-Select</strong> 
+                <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[4].id).type_id) %>
+                 <% if notific.present? %>
+                  (complited)
+                 <% else %>
+
+                 <% end %>
                </div>
               </div>
             </div>
@@ -115,6 +145,12 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                  <strong>Media question</strong> 
+                 <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[5].id).type_id) %>
+                 <% if notific.present? %>
+                  (complited)
+                 <% else %>
+
+                 <% end %>
                 </div>
               </div>
             </div>
@@ -134,6 +170,12 @@
                 </div>
                 <div class="">
                 <strong>Written question</strong> 
+                <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[6].id).type_id) %>
+                 <% if notific.present? %>
+                  (complited)
+                 <% else %>
+
+                 <% end %>
                </div>
                
                 </div>

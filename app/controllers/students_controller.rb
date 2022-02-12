@@ -26,7 +26,7 @@ class StudentsController < ApplicationController
     end
 
     def result
-        @notification=Notification.create title:"test" , descriptions: "#{current_user.email} has given #{TypeOfQuiz.find(params[:type_of_quiz]).quiz.title}"
+        @notification=Notification.create title:"test" , descriptions: "#{current_user.email} has given #{TypeOfQuiz.find(params[:type_of_quiz]).quiz.title}",user_id: current_user.id,type_id: TypeOfQuiz.find(params[:type_of_quiz]).type_id
         i=1
         while(!params["selected_ans#{i}"].nil?)
             answer=params["selected_ans#{i}"].split(',')
