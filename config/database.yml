@@ -9,15 +9,16 @@ default: &default
 development:
   <<: *default
   database: example_development
-  #username: postgres
-  password: password
-  #host: localhost
+  username: postgres
+  password: postgres
+  host: localhost
 
 test:
   <<: *default
   database: example_test
   username: postgres
   password: 'postgres'
+  host: localhost
 
 production:
   <<: *default
