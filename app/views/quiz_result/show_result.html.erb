@@ -22,7 +22,7 @@
                     </p>
                     <div class="mt-4 space-y-4 mb-6">
                     <% if TypeOfQuiz.find(question.type_id).type.name == "Fill ups"%>
-                    Fill sentence : <input type="text" name="correct-answer" value="<%= question.submited_ans %>" class="pointer-events-none option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
+                    answer: <input type="text" name="correct-answer" value="<%= question.submited_ans %>" class="pointer-events-none option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
                     <% elsif TypeOfQuiz.find(question.type_id).type.name == "Jumbled Words" %>
                     correct sequence : <input type="text" value="<%= question.submited_ans %>" name="correct-answer" class="pointer-events-none option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
                     <% elsif TypeOfQuiz.find(question.type_id).type.name == "Mid-text-selecter" %>

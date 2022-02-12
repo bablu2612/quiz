@@ -34,32 +34,40 @@ class ImageUploadsController < ApplicationController
     # abort('here')
     @image_upload = ImageUpload.new(image_upload_params)
 
+    type_name=Type.find(params[:type_of_quiz])
+
+    
    data= ImageUpload.import(params[:image_upload][:upload_excel])
   #  data.default_sheet = 'Sheet 3'
 
   question=params[:question]
-  # correct_answer=params[:correct_answer]
-  # type_of_quiz=params[:type_of_quiz]
-  # i=1
-  # options=[]
-  # while(!params["option#{i}"].nil?)
-  #   options<<params["option#{i}"]
-  #   i=i+1
-  # end
+  
+  
+
   
 
    data.each_with_index do |hash,index|
     if index != 0
-    question=hash[0]
+      option_start=2
+      if type_name.name == "image question"
+       question="#{hash[0]}@#{hash[2]}"
+       option_start=3
+
+      else
+        question=hash[0]
+      end
     correct_answer=hash[1]
     type_of_quiz=params[:type_of_quiz]
     options=[]
+    if type_name.name != "Fill ups" || type_name.name != "Jumbled Words" ||type_name.name != "Written question"
 
-    hash.each_with_index do |optiondata,index|
-      if index >=2
-        options<<optiondata
+      hash.each_with_index do |optiondata,index|
+        if index >=option_start
+          options<<optiondata
+        end
       end
-    end
+    
+  end
 
       Question.create({question:question,options:options,answer:correct_answer,type_of_quiz_id:type_of_quiz})
 
@@ -76,15 +84,6 @@ class ImageUploadsController < ApplicationController
   
   redirect_to type_of_quizzes_path(quiz_id: TypeOfQuiz.find(params[:type_of_quiz]).quiz_id), notice: "Question was successfully added."
 
-  # respond_to do |format|
-  #     if @image_upload.save
-  #       format.html { redirect_to image_upload_url(@image_upload), notice: "Image upload was successfully created." }
-  #       format.json { render :show, status: :created, location: @image_upload }
-  #     else
-  #       format.html { render :new, status: :unprocessable_entity }
-  #       format.json { render json: @image_upload.errors, status: :unprocessable_entity }
-  #     end
-  #   end
   end
 
   # PATCH/PUT /image_uploads/1 or /image_uploads/1.json

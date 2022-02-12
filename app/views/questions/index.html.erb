@@ -11,7 +11,7 @@
     <div class="flex justify-center mt-8">
     <div class="rounded-lg shadow-xl bg-gray-50  w-full mb-8">
         <div class="m-4">
-            <label class="inline-block mb-2 text-gray-500">Upload Question</label>
+            <label class="inline-block mb-2 text-gray-500">Upload <b><%= Type.find(params[:type_of_quiz]).name %> </b>Question</label>
             <p class="text-gray-500">Please select file that in (.xslx) format </p>
             <%= link_to "Click here for check instruction", upload_detail_path(quiz_id: params[:type_of_quiz]),class: "text-blue-600 float-left" %>
 
@@ -27,7 +27,7 @@
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             Attach a file</p>
                     </div>
-                    <%= form.file_field :upload_excel ,class: "opacity-0" %>
+                    <%= form.file_field :upload_excel ,class: "opacity-0" , accept: ".xls,.xlsx" %>
                     <%= hidden_field_tag 'type_of_quiz', params[:type_of_quiz]  %>
                 
                 </label>
@@ -37,8 +37,10 @@
 
 
         <div class="flex justify-center p-2">
-            <button type="submit" class="upload_ques w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl cursor-not-allowed">Upload Question</button>
-        </div>
+            <button type="button" class="upload_ques_unselected w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl cursor-not-allowed opacity-50">Upload Question</button>
+            <button type="submit" class="upload_ques hidden w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl">Upload Question</button>
+
+            </div>
     </div>
   </div> 
   <% end %>
@@ -49,8 +51,8 @@
   
   
     <div class="flex justify-between items-center w-full">
-      <h1 class="font-bold text-3xl uppercase text-gray-500">Questions</h1>
-      <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: " rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
+      <h1 class="font-bold text-3xl uppercase text-gray-500"><%= Type.find(params[:type_of_quiz]).name %> questions</h1>
+      <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "hidden rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
     </div>
     <% if @questions.present? %>
       <div class="pt-6 sm:pt-5">
@@ -85,7 +87,10 @@
   })
 
   $('input[type=file]').change(function(e) { 
-    $(".upload_ques").removeClass("cursor-not-allowed");
+    $(".upload_ques_unselected").addClass("hidden");
+    $(".upload_ques").removeClass("hidden");
+
+    
     var file = e.target.files[0].name;
     $('.selected_file').html('<b>'+file+'</b>'); 
 });
