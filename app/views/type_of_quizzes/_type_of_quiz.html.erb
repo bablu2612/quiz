@@ -15,9 +15,9 @@
     </td>
     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
       <% if user_signed_in? && current_user.role != "admin" %>
-        <%= link_to "Edit",edit_type_of_quiz_path(type_of_quiz),class:"inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"%>      
+        <%= link_to "Edit",edit_type_of_quiz_path(type_of_quiz),class:"hidden inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"%>      
       <% end %>
-      <%= link_to "Show Quiz",questions_path(type_of_quiz: type_of_quiz.id),class:"inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"%>
+      <%= link_to "add question",questions_path(type_of_quiz: type_of_quiz.id),class:"inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"%>
     </td>
   </tr>
 </div>

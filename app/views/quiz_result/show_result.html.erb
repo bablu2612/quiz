@@ -5,7 +5,10 @@
     <% if @quiz_results.present? %>
       <div class="pt-6 sm:pt-5">
         <div role="group" aria-labelledby="label-notifications">
+
           <div class="w-full">
+          <div class="ml-3 text-grey-500 text-3xl "><h2><%= @score_data %></h2></div>
+
             <div id="questions" class="min-w-full">
               <%= form_tag do%>
                 
@@ -35,7 +38,7 @@
                     <% else %>
                     <span class="text-red-500"><b>Incorrect</b></span>
                     <% end %>
-                    
+
                     <% elsif TypeOfQuiz.find(question.type_id).type.name == "Jumbled Words" %>
                     correct sequence : <input type="text" value="<%= question.submited_ans %>" name="correct-answer" class="pointer-events-none option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
                     <% if question.correct_ans == question.submited_ans %>
