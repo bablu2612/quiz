@@ -34,7 +34,7 @@ class ImageUploadsController < ApplicationController
     # abort('here')
     @image_upload = ImageUpload.new(image_upload_params)
 
-    type_name=Type.find(params[:type_of_quiz])
+    type_name=TypeOfQuiz.find(params[:type_of_quiz]).type
 
     
    data= ImageUpload.import(params[:image_upload][:upload_excel])
