@@ -4,6 +4,11 @@ class TypeOfQuizzesController < ApplicationController
   # GET /type_of_quizzes or /type_of_quizzes.json
   def index
     @type_of_quizzes = TypeOfQuiz.where(quiz_id: params[:quiz_id])
+    @quiz = Quiz.find(params[:quiz_id])
+    @class_name = @quiz.level.module_name.class_name.name
+    @level_name = @quiz.level.name
+    @module_name = @quiz.level.module_name.name
+    @quiz_title = @quiz.title
   end
 
   # GET /type_of_quizzes/1 or /type_of_quizzes/1.json

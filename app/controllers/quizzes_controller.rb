@@ -3,7 +3,11 @@ class QuizzesController < ApplicationController
 
   # GET /quizzes or /quizzes.json
   def index
-    @quizzes = Quiz.all.order('created_at')
+    @quizzes = Quiz.all.order('created_at').where(level_id: params[:level_id])
+    @level = Level.find(params[:level_id])
+    @class_name = @level.module_name.class_name.name
+    @module_name = @level.module_name.name
+    @level_name = @level.name
   end
 
   # GET /quizzes/1 or /quizzes/1.json
@@ -26,7 +30,7 @@ class QuizzesController < ApplicationController
 
       respond_to do |format|
         if @quiz.save
-          format.html { redirect_to quizzes_path, notice: "Quiz was successfully created." }
+          format.html { redirect_to quizzes_path(level_id: @quiz.level_id), notice: "Quiz was successfully created." }
           format.json { render :show, status: :created, location: @quiz }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -34,11 +38,6 @@ class QuizzesController < ApplicationController
         end
       end
     
-  end
-
-  def activate_quiz
-    Quiz.update_all(active: 0)
-    Quiz.find(params[:quiz_id]).update(active: 1)
   end
 
   # PATCH/PUT /quizzes/1 or /quizzes/1.json
@@ -72,6 +71,6 @@ class QuizzesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quiz_params
-      params.require(:quiz).permit(:title, :description)
+      params.require(:quiz).permit(:title, :description,:level_id)
     end
 end

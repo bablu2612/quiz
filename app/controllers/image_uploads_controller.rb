@@ -49,7 +49,7 @@ class ImageUploadsController < ApplicationController
    data.each_with_index do |hash,index|
     if index != 0
       option_start=2
-      if type_name.name == "image question"
+      if type_name.name == "image question" ||type_name.name == "Image question with text-field"
        question="#{hash[0]}@#{hash[2]}"
        option_start=3
 

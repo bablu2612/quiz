@@ -1,0 +1,88 @@
+<% if notice.present? %>
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<% end %>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="w-full block">
+<div class="flex flex-col">
+  <h2 class="max-w-6xl mb-2 mt-8 px-4 text-3xl uppercase text-left leading-6 font-medium text-gray-500 sm:px-6 lg:px-8">
+    Select Quiz to assign
+  </h2>
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Sr No.
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Student Name
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Currently Assigned quiz
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Assign this quiz
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @students.each_with_index do |student, index| %> 
+                <% index += 1 %>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= index %>
+                </td> 
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= student.email %>
+                </td> 
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <% student_quiz = StudentQuiz.where(user_id: student.id)%>
+                    <% unless student_quiz.length == 0 %>
+                     <%= Quiz.find(StudentQuiz.where(user_id: student.id).first.quiz_id).title %> 
+                    <% end %> 
+                </td> 
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <label class="flex items-center cursor-pointer ml-8" onclick="assign_quiz(<%= student.id %>,<%= params[:quiz_id] %>)">
+                        <!-- toggle -->
+                        <div class="relative">
+                        <!-- input -->
+                        <% unless StudentQuiz.where(user_id: student.id,quiz_id: params[:quiz_id]).length == 0 %>            
+                            <input id="toogleA" name="activate" checked="true" type="radio" class="sr-only" />
+                        <% else %>
+                            <input id="toogleA" name="activate" type="radio" class="sr-only" />
+                        <% end %>          
+                        <!-- line -->
+                        <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                        <!-- dot -->
+                        <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                        </div>
+                    </label>
+                </td>
+              </tr>  
+            <% end %>    
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<style>
+  /* Toggle A */
+  input[type="radio"]:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #06b6d4;
+  }
+</style>
+<script>
+  function assign_quiz(student_id,quiz_id){
+    $.ajax({
+      type: "get",
+      data: "user_id="+student_id+"&quiz_id="+quiz_id,
+      url: "<%= assign_quiz_path %>"
+    })    
+  }
+</script>

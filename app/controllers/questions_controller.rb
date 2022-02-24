@@ -7,7 +7,12 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
     @image_upload = ImageUpload.new
-
+    @type_of_quiz = TypeOfQuiz.find(params[:type_of_quiz])
+    @class_name = @type_of_quiz.quiz.level.module_name.class_name.name
+    @module_name = @type_of_quiz.quiz.level.module_name.name
+    @level_name = @type_of_quiz.quiz.level.name
+    @quiz_title = @type_of_quiz.quiz.title
+    @type_of_quiz_title = TypeOfQuiz.find(params[:type_of_quiz]).type.name
   end
 
   # GET /questions/1 or /questions/1.json

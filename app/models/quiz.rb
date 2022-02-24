@@ -1,6 +1,6 @@
 class Quiz < ApplicationRecord
     has_many :type_of_quizzes, dependent: :destroy
-
+    belongs_to :level
     after_create :create_type_of_quiz
 
     def create_type_of_quiz()

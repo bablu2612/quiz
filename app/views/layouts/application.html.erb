@@ -77,9 +77,9 @@
                 <i class="fa fa-home" style="font-size:22px"></i>&ensp;&ensp;
                 Home
               <% end %>
-              <%= link_to quizzes_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+              <%= link_to class_names_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
                 <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
-                Quizzes
+                Class
               <% end %>
 
               <%= link_to quiz_result_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
@@ -115,9 +115,14 @@
                 <i class="fa fa-home" style="font-size:22px"></i>&ensp;&ensp;
                 Home
               <% end %>
-              <%= link_to quizzes_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
-                <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
-                Quizzes
+              <%= link_to class_names_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-users" style="font-size:22px"></i>&ensp;&ensp;
+                Classes
+              <% end %>
+
+              <%= link_to student_quizzes_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-check" style="font-size:22px"></i>&ensp;&ensp;
+                Assign Quiz to Students
               <% end %>
 
               <%= link_to quiz_result_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
@@ -203,7 +208,7 @@
                   </div>
                 </div>
                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
-                  <%= link_to "Add Quiz",new_quiz_path, class: "float-left bg-transparent hover:bg-cyan-700 text-cyan-600 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent hover:shadow-xl" %>
+                  <%= link_to "Add Class",new_class_name_path, class: "float-left bg-transparent hover:bg-cyan-700 text-cyan-600 font-semibold hover:text-white py-2 px-4 border border-cyan-700 hover:border-transparent hover:shadow-xl" %>
                 </div>
               </div>
             </div>

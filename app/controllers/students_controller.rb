@@ -1,5 +1,8 @@
 class StudentsController < ApplicationController
     before_action :check_is_login
+    before_action :set_type_of_quiz
+    before_action :set_path_name, only: %i[index show_quiz]
+    skip_before_action :verify_authenticity_token
     def check_is_login
         if user_signed_in?
         else
@@ -9,18 +12,16 @@ class StudentsController < ApplicationController
 
     def index
         if current_user.role == "student"
-            @types=Type.all
-            @type_of_quiz=TypeOfQuiz.where(quiz_id: Quiz.where(active: 1).first.id)
             render layout: "student"
-          else
+        else
             redirect_to '/teacher'
-          end
+        end
     end
 
     def show_quiz
-        @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
-        @type_of_quiz=TypeOfQuiz.where(quiz_id: Quiz.where(active: 1).first.id)
-
+        unless StudentQuiz.where(user_id: current_user.id, quiz_id: TypeOfQuiz.find(params[:type_of_quiz]).quiz.id).length == 0
+            @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
+        end
         render layout: "student"
 
     end
@@ -50,9 +51,7 @@ class StudentsController < ApplicationController
         if @type_of_quiz == "Written question"
                 @message="Questions successfully submited"
         else
-            quiz_result=Notification.find(params[:notification]).quiz_results
-            @type_of_quiz=TypeOfQuiz.where(quiz_id: Quiz.where(active: 1).first.id)
-    
+            quiz_result=Notification.find(params[:notification]).quiz_results    
         @score=0
         @result=Array.new   
         quiz_result.each_with_index  do |quiz,index|            
@@ -68,5 +67,23 @@ class StudentsController < ApplicationController
 
     end
         render layout: 'student'
+    end
+
+    def set_type_of_quiz
+        @quiz = StudentQuiz.find_by_user_id(current_user.id)
+        unless @quiz.nil?
+            quiz_id = @quiz.quiz_id
+            @types=Type.all
+            @type_of_quiz=TypeOfQuiz.where(quiz_id: quiz_id)
+        end
+    end
+
+    def set_path_name
+        unless @quiz.nil?
+            @class_name = @quiz.quiz.level.module_name.class_name.name
+            @module_name = @quiz.quiz.level.module_name.name
+            @level_name = @quiz.quiz.level.name
+            @quiz_title = @quiz.quiz.title
+        end
     end
 end

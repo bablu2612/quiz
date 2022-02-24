@@ -5,7 +5,7 @@
       <br>
       <p class="text-xl text-gray-600">
         Q<%= index+1 %>.&ensp;
-        <% if TypeOfQuiz.find(params[:type_of_quiz]).type.name == "image question" %>
+        <% if TypeOfQuiz.find(params[:type_of_quiz]).type.name == "image question" || TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Image question with text-field" %>
         <% ques=question.question.split('@') %>
         <%= ques[0] %>
         <% else %>
@@ -61,6 +61,12 @@
               <label for="<%= index %><%=option %>" class="ml-3 block text-sm font-medium text-gray-700"><%= option %></label>
             </div>
           <% end %>
+
+          <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Image question with text-field" %>    
+          <div>
+          <img src="<%= ques[1] %>" alt="image question">
+          </div>
+          answer: <input type="text" name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
 
           <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Written question" %>    
          

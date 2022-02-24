@@ -2,7 +2,12 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-
+    <h2 class="mt-8 mb-4 px-4 text-2xl uppercase text-left leading-6 font-medium text-gray-500 sm:px-6 lg:px-8">
+      <%= "#{@class_name} > #{@module_name} > #{@level_name} > #{@quiz_title} > " %>
+    </h2>
+    <span class="mb-2 px-4 text-3xl uppercase text-left leading-6 font-medium text-gray-500 sm:px-6 lg:px-8">
+      <%= "#{@type_of_quiz_title} > "%>Questions
+    </span>
 
 
 
@@ -72,7 +77,6 @@
       </div>
     </div>
   <% end %>
-  
 <script>
   $("#submit-answer-button").on("click",function() {
     $.ajax({

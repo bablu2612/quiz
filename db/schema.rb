@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_060653) do
+ActiveRecord::Schema.define(version: 2022_02_23_182903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_060653) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -48,9 +48,15 @@ ActiveRecord::Schema.define(version: 2022_02_08_060653) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "class_names", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "image_uploads", force: :cascade do |t|
@@ -59,19 +65,37 @@ ActiveRecord::Schema.define(version: 2022_02_08_060653) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "levels", force: :cascade do |t|
+    t.string "name"
+    t.bigint "module_name_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["module_name_id"], name: "index_levels_on_module_name_id"
+  end
+
+  create_table "module_names", force: :cascade do |t|
+    t.string "name"
+    t.bigint "class_name_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["class_name_id"], name: "index_module_names_on_class_name_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "title"
     t.string "descriptions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "readed"
+    t.string "user_id"
+    t.string "type_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.text "question"
     t.text "options"
     t.string "answer"
-    t.integer "type_of_quiz_id", null: false
+    t.bigint "type_of_quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["type_of_quiz_id"], name: "index_questions_on_type_of_quiz_id"
@@ -93,12 +117,22 @@ ActiveRecord::Schema.define(version: 2022_02_08_060653) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "active"
+    t.bigint "level_id", null: false
+    t.index ["level_id"], name: "index_quizzes_on_level_id"
+  end
+
+  create_table "student_quizzes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "quiz_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quiz_id"], name: "index_student_quizzes_on_quiz_id"
+    t.index ["user_id"], name: "index_student_quizzes_on_user_id"
   end
 
   create_table "type_of_quizzes", force: :cascade do |t|
     t.text "description"
-    t.integer "quiz_id", null: false
+    t.bigint "quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "type_id"
@@ -139,7 +173,12 @@ ActiveRecord::Schema.define(version: 2022_02_08_060653) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "levels", "module_names"
+  add_foreign_key "module_names", "class_names"
   add_foreign_key "questions", "type_of_quizzes"
+  add_foreign_key "quizzes", "levels"
+  add_foreign_key "student_quizzes", "quizzes"
+  add_foreign_key "student_quizzes", "users"
   add_foreign_key "type_of_quizzes", "quizzes"
   add_foreign_key "type_of_quizzes", "types"
 end

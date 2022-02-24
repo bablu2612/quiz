@@ -1,10 +1,23 @@
 Rails.application.routes.draw do
 
+
+  resources :student_quizzes
+  get 'all_students',to: 'student_quizzes#all_students'
+  get 'assign_quiz', to: 'student_quizzes#assign_quiz'
+  resources :class_names do
+    resources :module_names do
+      resources :levels 
+    end
+  end
+
+  # resources :module_names
+  # resources :levels
+  # resources :class_names
+
   resources :image_uploads
   resources :questions
   resources :type_of_quizzes
   resources :quizzes
-  get 'activate_quiz', to: 'quizzes#activate_quiz'
   get 'home', to: 'static_pages#home'
   get 'teacher', to: 'static_pages#show'
 
