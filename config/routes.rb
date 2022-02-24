@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  resources :managestudents
 
   resources :student_quizzes
   get 'all_students',to: 'student_quizzes#all_students'
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :levels 
     end
   end
+
 
   # resources :module_names
   # resources :levels

@@ -81,7 +81,10 @@
                 <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
                 Class
               <% end %>
-
+  <%= link_to student_quizzes_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-check" style="font-size:22px"></i>&ensp;&ensp;
+                Assign Quiz to Students
+              <% end %>
               <%= link_to quiz_result_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
                 <i class="fa fa-question-circle" style="font-size:22px"></i>&ensp;&ensp;
                 Quiz Result Notification
@@ -115,6 +118,13 @@
                 <i class="fa fa-home" style="font-size:22px"></i>&ensp;&ensp;
                 Home
               <% end %>
+
+              <%= link_to managestudents_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
+                <i class="fa fa-users" style="font-size:22px"></i>&ensp;&ensp;
+                Srudents
+              <% end %>
+
+
               <%= link_to class_names_path, class:"bg-cyan-800 text-white group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" do %>
                 <i class="fa fa-users" style="font-size:22px"></i>&ensp;&ensp;
                 Classes
