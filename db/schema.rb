@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_182903) do
+ActiveRecord::Schema.define(version: 2022_02_26_101413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,15 +118,16 @@ ActiveRecord::Schema.define(version: 2022_02_23_182903) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "level_id", null: false
+    t.boolean "active"
     t.index ["level_id"], name: "index_quizzes_on_level_id"
   end
 
   create_table "student_quizzes", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["quiz_id"], name: "index_student_quizzes_on_quiz_id"
+    t.bigint "class_name_id", null: false
+    t.index ["class_name_id"], name: "index_student_quizzes_on_class_name_id"
     t.index ["user_id"], name: "index_student_quizzes_on_user_id"
   end
 
@@ -177,7 +178,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_182903) do
   add_foreign_key "module_names", "class_names"
   add_foreign_key "questions", "type_of_quizzes"
   add_foreign_key "quizzes", "levels"
-  add_foreign_key "student_quizzes", "quizzes"
+  add_foreign_key "student_quizzes", "class_names"
   add_foreign_key "student_quizzes", "users"
   add_foreign_key "type_of_quizzes", "quizzes"
   add_foreign_key "type_of_quizzes", "types"

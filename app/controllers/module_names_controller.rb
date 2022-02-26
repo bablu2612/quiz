@@ -27,7 +27,7 @@ class ModuleNamesController < ApplicationController
 
     respond_to do |format|
       if @module_name.save
-        format.html { redirect_to class_name_module_names_path(@module_name.class_name_id), notice: "Module name was successfully created." }
+        format.html { redirect_to class_name_module_names_path(@module_name.class_name_id), notice: "Module was successfully created." }
         format.json { render :show, status: :created, location: @module_name }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class ModuleNamesController < ApplicationController
   def update
     respond_to do |format|
       if @module_name.update(module_name_params)
-        format.html { redirect_to class_name_module_names_path(params[:class_name_id]), notice: "Module name was successfully updated." }
+        format.html { redirect_to class_name_module_names_path(params[:class_name_id]), notice: "Module was successfully updated." }
         format.json { render :show, status: :ok, location: @module_name }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class ModuleNamesController < ApplicationController
     @module_name.destroy
 
     respond_to do |format|
-      format.html { redirect_to module_names_url, notice: "Module name was successfully destroyed." }
+      format.html { redirect_to request.referer, notice: "Module was successfully destroyed." }
       format.json { head :no_content }
     end
   end

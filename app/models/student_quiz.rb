@@ -1,4 +1,4 @@
 class StudentQuiz < ApplicationRecord
   belongs_to :user
-  belongs_to :quiz
+  belongs_to :class_name
 end

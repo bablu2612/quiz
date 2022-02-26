@@ -10,6 +10,12 @@ class QuizzesController < ApplicationController
     @level_name = @level.name
   end
 
+  def activate_quiz
+    quizzes=Quiz.where(level_id: params[:level_id])
+    quizzes.update_all(active: 0)
+    Quiz.find(params[:quiz_id]).update(active: 1)
+  end
+
   # GET /quizzes/1 or /quizzes/1.json
   def show
   end
@@ -58,7 +64,7 @@ class QuizzesController < ApplicationController
     @quiz.destroy
 
     respond_to do |format|
-      format.html { redirect_to quizzes_url, notice: "Quiz was successfully destroyed." }
+      format.html { redirect_to request.referer, notice: "Quiz was successfully destroyed." }
       format.json { head :no_content }
     end
   end

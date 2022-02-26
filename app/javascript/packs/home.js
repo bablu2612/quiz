@@ -14,6 +14,12 @@ $(document).ready(function() {
   $(".side-nav-button").on("click",function(){
     $(".side-nav,.background-side-nav").toggle();
   })
+
+
+  $(".close_icons").on("click",function(){
+    $(".mobile_menu").toggle();
+  })
+  
   
   Number.prototype.leadingZeroes = function(len) {
     return (new Array(len).fill('0', 0).join('') + this).slice(-Math.abs(len));

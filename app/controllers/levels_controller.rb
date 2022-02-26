@@ -54,7 +54,7 @@ class LevelsController < ApplicationController
     @level.destroy
 
     respond_to do |format|
-      format.html { redirect_to levels_url, notice: "Level was successfully destroyed." }
+      format.html { redirect_to request.referer, notice: "Level was successfully destroyed." }
       format.json { head :no_content }
     end
   end

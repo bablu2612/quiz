@@ -54,7 +54,7 @@ class ClassNamesController < ApplicationController
     @class_name.destroy
 
     respond_to do |format|
-      format.html { redirect_to class_names_url, notice: "Class name was successfully destroyed." }
+      format.html { redirect_to class_names_url, notice: "Class was successfully destroyed." }
       format.json { head :no_content }
     end
   end

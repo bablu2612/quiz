@@ -1,8 +1,12 @@
 class StudentsController < ApplicationController
     before_action :check_is_login
-    before_action :set_type_of_quiz
-    before_action :set_path_name, only: %i[index show_quiz]
+    before_action :set_class_name
+    before_action :set_module_name,:set_level,:set_quiz,:set_type_of_quiz,:set_path_name,only: %i[index test_result ]
+    before_action :set_path_name
     skip_before_action :verify_authenticity_token
+    @module_name 
+    @level 
+    @quiz
     def check_is_login
         if user_signed_in?
         else
@@ -10,7 +14,8 @@ class StudentsController < ApplicationController
         end
       end
 
-    def index
+    def index         
+        set_module_name()
         if current_user.role == "student"
             render layout: "student"
         else
@@ -18,8 +23,9 @@ class StudentsController < ApplicationController
         end
     end
 
-    def show_quiz
-        unless StudentQuiz.where(user_id: current_user.id, quiz_id: TypeOfQuiz.find(params[:type_of_quiz]).quiz.id).length == 0
+    def show_quiz         
+        set_module_name()
+        unless StudentQuiz.where(user_id: current_user.id, class_name_id: @class_name.id).length == 0
             @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
         end
         render layout: "student"
@@ -46,8 +52,7 @@ class StudentsController < ApplicationController
         end
         redirect_to test_result_path(notification:@notification.id)       
     end 
-    def test_result
-        
+    def test_result        
         if @type_of_quiz == "Written question"
                 @message="Questions successfully submited"
         else
@@ -69,21 +74,95 @@ class StudentsController < ApplicationController
         render layout: 'student'
     end
 
+    def set_class_name
+        @student_quiz=StudentQuiz.find_by_user_id(current_user.id)
+        unless @student_quiz.nil?
+            @class_name = @student_quiz.class_name
+        end
+    end
+ 
+    def set_module_name
+        unless @class_name.nil?
+            @module_names = @class_name.module_names
+            unless params[:module_name_id].nil?
+                $module_name=ModuleName.find(params[:module_name_id])
+            else
+                $module_name = @class_name.module_names.first
+            end
+            set_path_name()
+            set_level()
+        else
+            $module_name=nil
+        end
+    end
+
+    def set_level
+        unless $module_name.nil?
+            @levels=$module_name.levels
+            unless params[:level_id].nil?
+                $level=Level.find(params[:level_id])
+            else
+                $level = $module_name.levels.first
+            end
+            set_path_name()
+            set_quiz()
+        end
+    end
+
+    def set_quiz
+        unless $level.nil?
+            @quizzes=Quiz.where(level_id: $level.id)
+            unless params[:quiz_id].nil?
+                $quiz=Quiz.find(params[:quiz_id])
+            else            
+                $quiz=Quiz.where(level_id: $level.id).first
+            end
+            set_path_name()
+            set_type_of_quiz()
+        end
+    end
+
+    ### Method for Active Quiz Option
+    # def set_quiz
+    #     unless $level.nil?
+    #         @quizzes=Quiz.where(level_id: $level.id, active: 1)
+    #         unless params[:quiz_id].nil?
+    #             $quiz=Quiz.find(params[:quiz_id])
+    #         else            
+    #             $quiz=Quiz.where(level_id: $level.id, active: 1).first
+    #         end
+    #         set_path_name()
+    #         set_type_of_quiz()
+    #     end
+    # end
+
     def set_type_of_quiz
-        @quiz = StudentQuiz.find_by_user_id(current_user.id)
-        unless @quiz.nil?
-            quiz_id = @quiz.quiz_id
-            @types=Type.all
-            @type_of_quiz=TypeOfQuiz.where(quiz_id: quiz_id)
+        @types=Type.all
+        unless $quiz.nil?
+            @type_of_quiz = TypeOfQuiz.where(quiz_id: $quiz)
+        else
+            @type_of_quiz = nil
         end
     end
 
     def set_path_name
-        unless @quiz.nil?
-            @class_name = @quiz.quiz.level.module_name.class_name.name
-            @module_name = @quiz.quiz.level.module_name.name
-            @level_name = @quiz.quiz.level.name
-            @quiz_title = @quiz.quiz.title
+        unless $module_name.nil?
+            @module_name_name = $module_name.name
+        else
+            @module_name_name = nil
+        end
+        unless @class_name.nil?
+            @class_name_name = @class_name.name
+        end
+        unless $level.nil?
+            @level_name = $level.name
+        else
+            @level_name = nil
+        end
+        unless $quiz.nil?
+            @quiz_title = $quiz.title
+        else
+            @quiz_title = nil
         end
     end
 end

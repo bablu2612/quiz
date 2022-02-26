@@ -3,11 +3,9 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice_succ"></p>
-
-  <% unless @quiz.nil? %>
+  <% unless @class_name.nil? %>
     <h2 class="text-lg leading-6 font-medium text-gray-500 uppercase mt-4 mb-4">
-      <%= "#{@class_name} > #{@module_name} > #{@level_name} > #{@quiz_title}"%>
+      <%= "#{@class_name_name} > #{@module_name_name} > #{@level_name} > #{@quiz_title}"%>
     </h2>
     <div class="flex justify-between items-center w-full">
       <h1 class="font-bold text-3xl uppercase text-gray-500"><%= TypeOfQuiz.find(params[:type_of_quiz]).type.name.humanize %> Questions</h1>

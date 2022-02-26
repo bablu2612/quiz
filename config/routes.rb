@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'set_module_name', to: 'students#set_module_name', :defaults => { :format => 'js' }
+  get 'set_level', to: 'students#set_level', :defaults => { :format => 'js' }
+  get 'set_quiz', to: 'students#set_quiz', :defaults => { :format => 'js' }
+  get 'set_type_of_quiz', to: 'students#set_type_of_quiz', :defaults => { :format => 'js' }
 
   # resources :module_names
   # resources :levels
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
 
   get 'upload_detail', to: 'static_pages#upload_detail'
 
-
+  get 'activate_quiz', to: 'quizzes#activate_quiz'
   
   root 'static_pages#home'
   # root 'devise/sessions#new'

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   end
  
   def render_404
+    abort()
     render partial:"errors/error_404"
   end
 end

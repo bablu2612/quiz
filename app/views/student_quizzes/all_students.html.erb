@@ -5,10 +5,10 @@
 <div class="w-full block">
 <div class="flex flex-col">
   <h2 class="max-w-6xl mb-2 mt-8 px-4 text-3xl uppercase text-left leading-6 font-medium text-gray-500 sm:px-6 lg:px-8">
-    Select Quiz to assign
+    Assign Class
   </h2>
-  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+  <div class="w-full overflow-x-auto">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-2">
       <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
@@ -20,10 +20,10 @@
                 Student Name
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Currently Assigned quiz
+                Currently Assigned Class
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Assign this quiz
+                Assign Class
               </th>
             </tr>
           </thead>
@@ -40,18 +40,19 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <% student_quiz = StudentQuiz.where(user_id: student.id)%>
                     <% unless student_quiz.length == 0 %>
-                     <%= Quiz.find(StudentQuiz.where(user_id: student.id).first.quiz_id).title %> 
+                    <% class_name = ClassName.find(StudentQuiz.where(user_id: student.id).first.class_name_id)%>
+                     <%= "#{class_name.name.humanize}" %> 
                     <% end %> 
                 </td> 
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    <label class="flex items-center cursor-pointer ml-8" onclick="assign_quiz(<%= student.id %>,<%= params[:quiz_id] %>)">
+                    <label class="flex items-center cursor-pointer ml-8" onclick="assign_quiz(<%= student.id %>,<%= params[:class_name_id] %>)">
                         <!-- toggle -->
                         <div class="relative">
                         <!-- input -->
-                        <% unless StudentQuiz.where(user_id: student.id,quiz_id: params[:quiz_id]).length == 0 %>            
-                            <input id="toogleA" name="activate" checked="true" type="radio" class="sr-only" />
+                        <% unless StudentQuiz.where(user_id: student.id,class_name_id: params[:class_name_id]).length == 0 %>            
+                            <input id="check<%= student.id%>" checked="true" type="checkbox" class="sr-only" />
                         <% else %>
-                            <input id="toogleA" name="activate" type="radio" class="sr-only" />
+                            <input id="check<%= student.id%>" type="checkbox" class="sr-only" />
                         <% end %>          
                         <!-- line -->
                         <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
@@ -72,17 +73,19 @@
 
 <style>
   /* Toggle A */
-  input[type="radio"]:checked ~ .dot {
+  input[type="checkbox"]:checked ~ .dot {
     transform: translateX(100%);
     background-color: #06b6d4;
   }
 </style>
 <script>
-  function assign_quiz(student_id,quiz_id){
-    $.ajax({
-      type: "get",
-      data: "user_id="+student_id+"&quiz_id="+quiz_id,
-      url: "<%= assign_quiz_path %>"
-    })    
+  function assign_quiz(student_id,class_name_id){
+    $("#check"+student_id).on("click",function(){
+      $.ajax({
+        type: "get",
+        data: "user_id="+student_id+"&class_name_id="+class_name_id+"&checked="+$("#check"+student_id).is(":checked"),
+        url: "<%= assign_quiz_path %>"
+      })  
+    })  
   }
 </script>

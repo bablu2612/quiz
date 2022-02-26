@@ -3,7 +3,7 @@ class StudentQuizzesController < ApplicationController
 
   # GET /student_quizzes or /student_quizzes.json
   def index
-    @quizzes = Quiz.all
+    @class_names = ClassName.all
   end
 
   def all_students
@@ -15,7 +15,9 @@ class StudentQuizzesController < ApplicationController
     unless student_previous_quiz.nil?
       student_previous_quiz.destroy
     end
-    StudentQuiz.create(user_id: params[:user_id],quiz_id: params[:quiz_id])
+    if params[:checked] == "true"      
+      StudentQuiz.create(user_id: params[:user_id],class_name_id: params[:class_name_id])
+    end
   end
   
   # GET /student_quizzes/1 or /student_quizzes/1.json
@@ -77,6 +79,6 @@ class StudentQuizzesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_quiz_params
-      params.require(:student_quiz).permit(:user_id, :quiz_id)
+      params.require(:student_quiz).permit(:user_id, :class_name_id)
     end
 end
