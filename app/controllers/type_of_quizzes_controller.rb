@@ -3,7 +3,7 @@ class TypeOfQuizzesController < ApplicationController
 
   # GET /type_of_quizzes or /type_of_quizzes.json
   def index
-    @type_of_quizzes = TypeOfQuiz.where(quiz_id: params[:quiz_id])
+    @type_of_quizzes = TypeOfQuiz.where(quiz_id: params[:quiz_id]).order('updated_at DESC')
     @quiz = Quiz.find(params[:quiz_id])
     @class_name = @quiz.level.module_name.class_name.name
     @level_name = @quiz.level.name
@@ -70,6 +70,6 @@ class TypeOfQuizzesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def type_of_quiz_params
-      params.require(:type_of_quiz).permit(:type_id, :description, :quiz_id)
+      params.require(:type_of_quiz).permit(:type_id, :name, :description, :quiz_id)
     end
 end

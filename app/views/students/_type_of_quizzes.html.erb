@@ -3,8 +3,9 @@
   Type Of Quiz
 </h2>
 <% path_name = "#{@class_name_name} > #{@module_name_name} > #{@level_name} > #{@quiz_title}" %>
-<div class="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
+<div class="mt-2 grid grid-cols-1 mb-10 gap-6 sm:grid-cols-2 lg:grid-cols-2">
     <!-- Card -->
+      <% unless @type_of_quiz[0].questions.length == 0 %>
         <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[0], path_name: path_name) %>"class="shadow-xl">
             <div class="bg-orange-500 opacity-80 text-center uppercase text-white h-24 py-18 overflow-hidden shadow rounded-lg">
                 <div>
@@ -17,7 +18,7 @@
                     -->
                     </div>
                     <div class="ml-5 w-0 py-10 flex-1">
-                    <strong>MCQ</strong>
+                    <strong><%= @type_of_quiz[0].name %></strong>
                     <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[0].id).quiz.id) %>
                     <% if notific.present? %>
                     (complited)
@@ -28,7 +29,9 @@
                 </div>
                 </div>
             </div>
-        </a>
+        </a>        
+      <% end %>
+      <% unless @type_of_quiz[2].questions.length == 0 %> 
         <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[2], path_name: path_name) %>" class="shadow-xl" >
             <div class="bg-yellow-500 opacity-80 text-center uppercase text-white h-24 py-18 overflow-hidden shadow rounded-lg">
                 <div>
@@ -42,7 +45,7 @@
                         -->
                     </div>
                     <div class="ml-5 w-0 flex-1 py-10">
-                    <strong>Select One</strong> 
+                    <strong><%= @type_of_quiz[2].name %></strong> 
                     <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[2].id).type_id) %>
                     <% if notific.present? %>
                     (complited)
@@ -54,6 +57,8 @@
                 </div>
             </div>
         </a>
+        <% end %>
+        <% unless @type_of_quiz[3].questions.length == 0 %>
         <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[3], path_name: path_name) %>" class="shadow-xl">
             <div class="bg-green-500 opacity-80 text-center uppercase text-white h-24 py-18 overflow-hidden shadow rounded-lg">
               <div>
@@ -66,7 +71,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <strong>Jumbled words</strong> 
+                  <strong><%= @type_of_quiz[3].name %></strong> 
                   <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[3].id).type_id) %>
                   <% if notific.present? %>
                     (complited)
@@ -78,6 +83,8 @@
               </div>
             </div>
         </a>
+        <% end %>
+        <% unless @type_of_quiz[1].questions.length == 0 %>
             <!-- More items... -->
 
             <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[1], path_name: path_name) %>" class="shadow-xl">
@@ -93,7 +100,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <strong>Fillups</strong> 
+                  <strong><%= @type_of_quiz[1].name %></strong> 
                   <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[1].id).type_id) %>
                   <% if notific.present? %>
                     (complited)
@@ -104,8 +111,10 @@
                 </div>
               </div>
             </div>
-  </a>
-  <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[4], path_name: path_name) %>" class="shadow-xl" >
+          </a>
+          <% end %>
+          <% unless @type_of_quiz[4].questions.length == 0 %>
+            <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[4], path_name: path_name) %>" class="shadow-xl" >
             <div class="bg-cyan-500 opacity-80 text-center uppercase text-white h-24 py-18 overflow-hidden shadow rounded-lg">
               <div>
                 <div class="flex items-center">
@@ -118,7 +127,7 @@
                       -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <strong>Mid-Text-Select</strong> 
+                  <strong><%= @type_of_quiz[4].name %></strong> 
                   <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[4].id).type_id) %>
                   <% if notific.present? %>
                     (complited)
@@ -129,8 +138,11 @@
                 </div>
               </div>
             </div>
-  </a>
-  <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[5], path_name: path_name) %>" class="shadow-xl">
+            </a>
+          <% end %>
+          <% unless @type_of_quiz[5].questions.length == 0 %>
+
+            <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[5], path_name: path_name) %>" class="shadow-xl">
 
             <div class="bg-pink-500 opacity-80 text-center uppercase text-white h-24 py-18 overflow-hidden shadow rounded-lg">
               <div>
@@ -143,7 +155,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <strong>Media question</strong> 
+                  <strong><%= @type_of_quiz[5].name %></strong> 
                   <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[5].id).type_id) %>
                   <% if notific.present? %>
                     (complited)
@@ -154,9 +166,11 @@
                 </div>
               </div>
             </div>
-  </a>
+            </a>
+          <% end %>
+          <% unless @type_of_quiz[6].questions.length == 0 %>
 
-  <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[6], path_name: path_name) %>" class="shadow-xl">
+            <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[6], path_name: path_name) %>" class="shadow-xl">
             <div class="bg-purple-500 opacity-80 text-center uppercase text-white h-24 py-18 overflow-hidden shadow rounded-lg">
               <div>
                 <div class="flex items-center">
@@ -168,7 +182,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <strong>Written question</strong> 
+                  <strong><%= @type_of_quiz[6].name %></strong> 
                   <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[6].id).type_id) %>
                   <% if notific.present? %>
                     (complited)
@@ -179,8 +193,10 @@
                 </div>
               </div>
             </div>
-  </a>
-  <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[7], path_name: path_name) %>" class="shadow-xl">
+            </a>
+          <% end %>
+          <% unless @type_of_quiz[7].questions.length == 0 %>
+            <a href="<%= show_quiz_path(type_of_quiz: @type_of_quiz[7], path_name: path_name) %>" class="shadow-xl">
             <div class="bg-green-500 opacity-80 text-center uppercase text-white h-24 py-18 overflow-hidden shadow rounded-lg">
               <div>
                 <div class="flex items-center">
@@ -193,7 +209,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <strong>Image question with text-field</strong> 
+                  <strong><%= @type_of_quiz[7].name %></strong> 
                   <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[7].id).type_id) %>
                   <% if notific.present? %>
                     (complited)
@@ -205,7 +221,8 @@
                   </div>
               </div>
             </div>
-  </a>      
+            </a>     
+          <% end %> 
 </div>
 <% else %>
     <div class="text-3xl w-full px-4 leading-6 font-medium text-gray-500 uppercase mt-4 mb-4">

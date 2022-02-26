@@ -11,10 +11,15 @@
     </div>
   <% end %>
   <div class="my-5">
-    <%= form.label :name %>
-    <div id="name" class="block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
+    <%= form.label :type %>
+    <div id="type" class="block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
       <%= type_of_quiz.type.name %>
     </div>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="my-5">

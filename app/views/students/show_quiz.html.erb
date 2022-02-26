@@ -8,7 +8,7 @@
       <%= params[:path_name] %>
     </h2>
     <div class="flex justify-between items-center w-full">
-      <h1 class="font-bold text-3xl uppercase text-gray-500"><%= TypeOfQuiz.find(params[:type_of_quiz]).type.name.humanize %> Questions</h1>
+      <h1 class="font-bold text-3xl uppercase text-gray-500"><%= TypeOfQuiz.find(params[:type_of_quiz]).name %> Questions</h1>
       <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "hidden rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
     </div>
     <% if @questions.present? %>

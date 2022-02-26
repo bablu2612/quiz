@@ -1,8 +1,8 @@
 class StudentsController < ApplicationController
     before_action :check_is_login
     before_action :set_class_name
-    before_action :set_module_name,:set_level,:set_quiz,:set_type_of_quiz,:set_path_name,only: %i[index test_result ]
-    before_action :set_path_name
+    before_action :set_module_name,:set_level,:set_quiz,:set_type_of_quiz,only: %i[index test_result]
+    before_action :set_path_name, only: %i[index test_result]
     skip_before_action :verify_authenticity_token
     @module_name 
     @level 
@@ -165,4 +165,6 @@ class StudentsController < ApplicationController
             @quiz_title = nil
         end
     end
+
+    
 end

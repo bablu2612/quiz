@@ -3,7 +3,7 @@ class ClassNamesController < ApplicationController
 
   # GET /class_names or /class_names.json
   def index
-    @class_names = ClassName.all
+    @class_names = ClassName.all.order('created_at')
   end
 
   # GET /class_names/1 or /class_names/1.json
