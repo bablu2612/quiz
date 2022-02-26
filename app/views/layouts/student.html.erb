@@ -44,7 +44,7 @@
                   <div class="text-center text-lg uppercase mt-5 mb-2 text-red-800">Module: <%= module_name.name.humanize %></div>
                   <% unless module_name.levels.nil? %>
                     <% module_name.levels.each do |level|%>
-                      <div class="text-center text-gray-800 uppercase mt-5 mb-2">Level: <%= level.name.humanize %></div>
+                      <div class="text-center  uppercase mt-5 mb-2 text-red-500"> >Level:<%= level.name.humanize %></div>
                         <% unless level.quizzes.nil? %>
                           <% level.quizzes.each do |quiz|%>
                             <div class="text-center text-gray-800 uppercase mt-5 mb-2">Quiz: <%= quiz.title.humanize %></div>

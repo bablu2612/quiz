@@ -1,9 +1,9 @@
 <h2 class="text-2xl px-4 text-left leading-6 font-medium text-gray-500 uppercase mt-4 mb-4">
-Quiz
+    Quizzes
 </h2>
 <div class="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
     <% @quizzes.each do |quiz| %>
-    <button type="button" onclick="set_quiz(<%= quiz.id %>)" >
+    <button type="button" id="quiz<%=quiz.id%>" class="quiz" onclick="set_quiz(<%= quiz.id %>)" >
         <div class="bg-red-300 text-center uppercase text-gray-800 rounded h-10 py-18 overflow-hidden shadow-xl">
         <div>
             <div class="flex items-center">
@@ -24,3 +24,10 @@ Quiz
     </button>
     <% end %>
 </div>
+<script>
+    $(".quiz").css("border","none");
+    <% unless $quiz.nil? %>
+        $("#quiz<%=$quiz.id%>").css("border","solid 4px red");
+        $("#quiz<%=$quiz.id%>").css("border-radius","6px");
+    <% end %>
+</script>
