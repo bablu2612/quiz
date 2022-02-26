@@ -8,8 +8,7 @@ class ClassNamesController < ApplicationController
 
   # GET /class_names/1 or /class_names/1.json
   def show
-    @module_names = @class_name.module_names
-
+    redirect_to class_names_path
   end
 
   # GET /class_names/new
