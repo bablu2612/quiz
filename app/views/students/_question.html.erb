@@ -63,9 +63,8 @@
         <input type="hidden" class="<%= question.id %>" name="selected_ans<%= index+1 %>" />
 
         <% elsif TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Written question" %>    
-       
-        answer: <textarea  name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"  rows="4" cols="50" > </textarea>
-        
+          answer: <textarea id="<%= question.id %>" name="filll<%= index+1 %>" class="witten_question_answer option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" rows="4" cols="50"> </textarea>        
+          <input type="hidden" class="<%= question.id %>" name="selected_ans<%= index+1 %>" />        
 
       <% else %>
         <% question.options.each do |option| %>

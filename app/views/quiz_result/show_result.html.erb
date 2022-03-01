@@ -13,15 +13,13 @@
               <%= form_tag do%>
                 
                 <% @quiz_results.each do |question| %>
-
-
                 <div id="<%= dom_id question %>">
                 <% index=@quiz_results.find_index(question) %>
                 <div class="w-full px-8 py-4">
                   <div class="max-w-lg">
                     <p class="text-xl text-gray-600">
                       Q<%= index+1 %>.&ensp;
-                      <% if TypeOfQuiz.find(question.type_id).type.name == "image question" %>
+                      <% if Type.find(question.type_id).name == "image question" %>
                       <% ques=question.question.split('@') %>
                       <%= ques[0] %>
                       <% else %>
@@ -31,7 +29,7 @@
                       <% end %>                  
                         </p>
                     <div class="mt-4 space-y-4 mb-6">
-                    <% if TypeOfQuiz.find(question.type_id).type.name == "Fill ups"%>
+                    <% if Type.find(question.type_id).name == "Fill ups"%>
                     answer: <input type="text" name="correct-answer" value="<%= question.submited_ans %>" class="pointer-events-none option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
                     <% if question.correct_ans == question.submited_ans %>
                     <span class="text-green-500"><b>correct</b></span>
@@ -39,14 +37,14 @@
                     <span class="text-red-500"><b>Incorrect</b></span>
                     <% end %>
 
-                    <% elsif TypeOfQuiz.find(question.type_id).type.name == "Jumbled Words" %>
+                    <% elsif Type.find(question.type_id).name == "Jumbled Words" %>
                     correct sequence : <input type="text" value="<%= question.submited_ans %>" name="correct-answer" class="pointer-events-none option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">
                     <% if question.correct_ans == question.submited_ans %>
                     <span class="text-green-500"><b>correct</b></span>
                     <% else %>
                     <span class="text-red-500"><b>Incorrect</b></span>
                     <% end %>
-                    <% elsif TypeOfQuiz.find(question.type_id).type.name == "Mid-text-selecter" %>
+                    <% elsif Type.find(question.type_id).name == "Mid-text-selecter" %>
                     <div class="flex items-center mb-2">
                     <select name="correct-answer<%= question.id %>" >
                       <% question.options.each do |option| %>
@@ -62,7 +60,7 @@
 
                       </div>
               
-                    <% elsif TypeOfQuiz.find(question.type_id).type.name == "Select one" %>
+                    <% elsif Type.find(question.type_id).name == "Select one" %>
                    
                      
                     <div>
@@ -93,7 +91,7 @@
 
 
 
-                    <% elsif TypeOfQuiz.find(question.type_id).type.name == "Mid text Selector" %>    
+                    <% elsif Type.find(question.type_id).name == "Mid text Selector" %>    
                     <div>
                       <label for="location" class="block text-sm font-medium text-gray-700">Select</label>
                       <select id="location" name="selected_ans<%= index+1 %>" class="pointer-events-none mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
@@ -119,7 +117,7 @@
 
                     </div>
             
-                    <% elsif TypeOfQuiz.find(question.type_id).type.name == "image question" %>    
+                    <% elsif Type.find(question.type_id).name == "image question" %>    
                     
                     <div>
                     <img src="<%= ques[1] %>" alt="image question">
@@ -146,10 +144,14 @@
                       <span class="text-red-500"><b>Incorrect</b></span>
                       <% end %>
             
-                    <% elsif TypeOfQuiz.find(question.type_id).type.name == "Written question" %>    
+                    <% elsif Type.find(question.type_id).name == "Written question" %>    
                    
                     answer: <textarea  name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"  rows="4" cols="50" ><%= question.submited_ans %> </textarea>
-                    
+                    <% if question.correct_ans == question.submited_ans %>
+                    <span class="text-green-500"><b>correct</b></span>
+                    <% else %>
+                    <span class="text-red-500"><b>Incorrect</b></span>
+                    <% end %>
               
                     <% else %>
                       <% question.options.each do |option| %>

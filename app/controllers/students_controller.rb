@@ -52,15 +52,12 @@ class StudentsController < ApplicationController
         end
         redirect_to test_result_path(notification:@notification.id)       
     end 
-    def test_result        
-        if @type_of_quiz == "Written question"
-                @message="Questions successfully submited"
-        else
-            quiz_result=Notification.find(params[:notification]).quiz_results    
+    def test_result 
+        quiz_result=Notification.find(params[:notification]).quiz_results    
         @score=0
         @result=Array.new   
         quiz_result.each_with_index  do |quiz,index|            
-           
+        
             if  quiz.correct_ans == quiz.submited_ans
                 @result << ["Q#{index+1}","Correct"]
                 @score = @score+1
@@ -68,9 +65,6 @@ class StudentsController < ApplicationController
                 @result<<["Q#{index+1}","Incorrect","Correct answer was #{quiz.correct_ans}"]
             end
         end
-
-
-    end
         render layout: 'student'
     end
 

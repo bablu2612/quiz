@@ -54,11 +54,18 @@ console.log('here1')
 
 
   $(".fillups_options").focusout(function(){
-  var id= $(this).attr("id");
-  var value=$(this).val();
-  $('.'+id).val(value+','+id);
-  console.log(id,value)
-});
+    var id= $(this).attr("id");
+    var value=$(this).val();
+    $('.'+id).val(value+','+id);
+    console.log(id,value);
+  });
+
+  $(".witten_question_answer").focusout(function(){
+    var id= $(this).attr("id");
+    var value=$(this).val();
+    $('.'+id).val(value+','+id);
+    console.log(id,value);
+  });
 </script>
 
 <style>
