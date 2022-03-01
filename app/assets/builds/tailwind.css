@@ -1233,16 +1233,16 @@ select {
   margin-top: 5rem;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
 .ml-6 {
   margin-left: 1.5rem;
 }
 
 .mr-8 {
   margin-right: 2rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
 }
 
 .block {
