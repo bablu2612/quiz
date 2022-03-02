@@ -35,6 +35,7 @@
                     <span class="text-green-500"><b>correct</b></span>
                     <% else %>
                     <span class="text-red-500"><b>Incorrect</b></span>
+                    <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                     <% end %>
 
                     <% elsif Type.find(question.type_id).name == "Jumbled Words" %>
@@ -43,6 +44,7 @@
                     <span class="text-green-500"><b>correct</b></span>
                     <% else %>
                     <span class="text-red-500"><b>Incorrect</b></span>
+                    <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                     <% end %>
                     <% elsif Type.find(question.type_id).name == "Mid-text-selecter" %>
                     <div class="flex items-center mb-2">
@@ -56,6 +58,7 @@
                       <span class="text-green-500"><b>correct</b></span>
                       <% else %>
                       <span class="text-red-500"><b>Incorrect</b></span>
+                      <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                       <% end %>
 
                       </div>
@@ -80,6 +83,7 @@
                           <span class="text-green-500"><b>correct</b></span>
                           <% else %>
                           <span class="text-red-500"><b>Incorrect</b></span>
+                          <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                           <% end %>
                     </div>
     
@@ -113,6 +117,7 @@
                       <span class="text-green-500"><b>correct</b></span>
                       <% else %>
                       <span class="text-red-500"><b>Incorrect</b></span>
+                      <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                       <% end %>
 
                     </div>
@@ -142,6 +147,7 @@
                       <span class="text-green-500"><b>correct</b></span>
                       <% else %>
                       <span class="text-red-500"><b>Incorrect</b></span>
+                      <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                       <% end %>
             
                     <% elsif Type.find(question.type_id).name == "Written question" %>    
@@ -151,6 +157,7 @@
                     <span class="text-green-500"><b>correct</b></span>
                     <% else %>
                     <span class="text-red-500"><b>Incorrect</b></span>
+                    <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                     <% end %>
               
                     <% else %>
@@ -173,6 +180,7 @@
                       <span class="text-green-500"><b>correct</b></span>
                       <% else %>
                       <span class="text-red-500"><b>Incorrect</b></span>
+                      <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                       <% end %>
                     <% end %>
                     </div>

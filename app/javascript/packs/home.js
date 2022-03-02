@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
     function dateTime() {
       var ndate = new Date();
       var hours = ndate.getHours();
