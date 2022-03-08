@@ -40,23 +40,20 @@ class ImageUploadsController < ApplicationController
    data= ImageUpload.import(params[:image_upload][:upload_excel])
   #  data.default_sheet = 'Sheet 3'
 
-  question=params[:question]
-  
-  
-
-  
+  question=params[:question]  
 
    data.each_with_index do |hash,index|
     if index != 0
       option_start=2
       if type_name.name == "image question" ||type_name.name == "Image question with text-field"
-       question="#{hash[0]}@#{hash[2]}"
+       question="#{hash[0]}@#{hash[3]}"
        option_start=3
 
       else
         question=hash[0]
       end
-    correct_answer=hash[1]
+    explanation = hash[1]
+    correct_answer=hash[2]
     type_of_quiz=params[:type_of_quiz]
     options=[]
     if type_name.name != "Fill ups" || type_name.name != "Jumbled Words" ||type_name.name != "Written question"
@@ -69,7 +66,7 @@ class ImageUploadsController < ApplicationController
     
   end
 
-      Question.create({question:question,options:options,answer:correct_answer,type_of_quiz_id:type_of_quiz})
+      Question.create({question:question,options:options,explanation: explanation, answer:correct_answer,type_of_quiz_id:type_of_quiz})
 
     end
     

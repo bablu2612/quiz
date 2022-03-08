@@ -26,31 +26,30 @@ class StudentsController < ApplicationController
     def show_quiz         
         set_module_name()
         unless StudentQuiz.where(user_id: current_user.id, class_name_id: @class_name.id).length == 0
-            @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
+            @questions = Question.where(type_of_quiz_id: params[:type_of_quiz]).shuffle()
+            @duration = TypeOfQuiz.find(params[:type_of_quiz]).duration
         end
         render layout: "student"
-
     end
 
     def result
         @notification=Notification.create title:"test" , descriptions: "#{current_user.email} has given #{TypeOfQuiz.find(params[:type_of_quiz]).quiz.title}",user_id: current_user.id,type_id: TypeOfQuiz.find(params[:type_of_quiz]).type_id
         i=1
-        while(!params["selected_ans#{i}"].nil?)
-            answer=params["selected_ans#{i}"].split(',')
+        @question = Question.where(type_of_quiz_id: params[:type_of_quiz])
+        @question.each do |question|
+            answer=params["selected_ans#{question.id}"].split(',')
             puts answer.to_json
-        @quiz_res= QuizResult.new
-
-            @question=Question.find(answer[1].to_i)
-            @quiz_res.type_id=@question.type_of_quiz.type.id
-            @quiz_res.question=@question.question
-            @quiz_res.options=@question.options
-            @quiz_res.correct_ans=@question.answer
+            @quiz_res= QuizResult.new
+            @quiz_res.type_id=question.type_of_quiz.type.id
+            @quiz_res.question=question.question
+            @quiz_res.options=question.options
+            @quiz_res.correct_ans=question.answer
             @quiz_res.submited_ans=answer[0]
             @quiz_res.notification_id=Notification.find(@notification.id)
             @quiz_res.save
             i=i+1
         end
-        redirect_to test_result_path(notification:@notification.id)       
+        redirect_to test_result_path(notification:@notification.id) 
     end 
     def test_result 
         quiz_result=Notification.find(params[:notification]).quiz_results    

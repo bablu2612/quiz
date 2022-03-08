@@ -4,16 +4,33 @@
   <% end %>
 
   <% unless @class_name.nil? %>
-    <h2 class="text-lg leading-6 font-medium text-gray-500 uppercase mt-4 mb-4">
+    <h2 class="text-lg px-4 py-4 leading-6 font-medium text-gray-500 uppercase mt-4 mb-4">
       <%= params[:path_name] %>
     </h2>
     <div class="flex justify-between items-center w-full">
       <h1 class="font-bold text-3xl uppercase text-gray-500"><%= TypeOfQuiz.find(params[:type_of_quiz]).name %> Questions</h1>
       <%= link_to 'Add a new question', new_question_path(type_of_quiz: params[:type_of_quiz]), class: "hidden rounded-lg py-3 px-5 bg-cyan-700 hover:bg-cyan-600 text-white block font-medium" %>
+      <% unless @duration.nil? %>
+        <div>
+              <div class="float-right">
+                <span class="mr-2">Time Left</span>
+                <span id="hours" class="font-bold text-xl"></span>
+                <span id="mins" class="font-bold text-xl"></span>
+                <span id="seconds" class="font-bold text-xl"></span>
+              </div>
+          </div>
+        </div>  
+        <script>
+          var total_time=<%= @duration %>*60*1000;
+          window.setTimeout(function() {
+                            $(".check_result").trigger("click");
+                          },total_time);
+        </script>
+      <% end %>  
     </div>
     <% if @questions.present? %>
 
-      <div class="pt-6 sm:pt-5">
+      <div class="pt-6 sm:pt-5 px-6 py-4">
         <div role="group" aria-labelledby="label-notifications">  
           <div class="w-full">
             <div id="questions" class="min-w-full">
@@ -35,7 +52,8 @@
 </div>
 
 <script>
-console.log('here1')
+
+
 
   $(".check_result").on("click",function() {
       console.log('here')
@@ -74,3 +92,56 @@ console.log('here1')
     padding-right: 2rem;
 }
 </style>
+
+<script>
+  //Timer
+  startTimer();
+  duration = <%= @duration %>/60;
+  if(duration <= 1) 
+  {
+    mins = <%= @duration %>-1;
+    hours=0;
+  }
+  else
+  {
+    hours=duration.toString().split(".")[0]
+    mins=(<%= @duration %> - hours*60)-1
+  }
+  seconds=60;
+  function startTimer() {
+    window.setTimeout(function () {
+      seconds--;
+        if (seconds < 1) {
+          seconds = 60;
+          mins--;
+        }
+        if (mins < 0 ) {
+          if(hours >= 1)
+          {
+            mins = 59;
+            hours--;
+          }
+        }
+        if (hours <= 1) {
+          $("#hours").html("0" + hours + ":");
+        } 
+        else 
+        {
+          $("#hours").html(hours + ":");
+        }
+        if (mins < 10) {
+          $("#mins").html("0" + mins + ":");
+        } 
+        else 
+        {
+          $("#mins").html(mins + ":");
+        }
+        if (seconds < 10) {
+          $("#seconds").html("0" + seconds);
+        } else {
+          $("#seconds").html(seconds);
+        }
+        startTimer();
+      }, 1000);
+  };
+</script>

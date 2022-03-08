@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   require 'roo'
   require 'spreadsheet'
   def index
-    @questions = Question.where(type_of_quiz_id: params[:type_of_quiz])
+    @questions = Question.where(type_of_quiz_id: params[:type_of_quiz]).shuffle()
     @image_upload = ImageUpload.new
     @type_of_quiz = TypeOfQuiz.find(params[:type_of_quiz])
     @class_name = @type_of_quiz.quiz.level.module_name.class_name.name
@@ -119,6 +119,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:question, :options, :answer, :type_of_quiz_id)
+      params.require(:question).permit(:question, :options, :answer, :type_of_quiz_id, :explanation)
     end
 end

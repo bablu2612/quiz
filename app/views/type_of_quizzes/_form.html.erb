@@ -23,6 +23,11 @@
   </div>
 
   <div class="my-5">
+    <%= form.label :duration %>
+    <%= form.number_field :duration,id: "duration" %> in minutes
+  </div>
+
+  <div class="my-5">
     <%= form.label :description %>
     <%= form.rich_text_area :description %>
   </div>

@@ -70,6 +70,6 @@ class TypeOfQuizzesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def type_of_quiz_params
-      params.require(:type_of_quiz).permit(:type_id, :name, :description, :quiz_id)
+      params.require(:type_of_quiz).permit(:type_id, :name, :description, :quiz_id, :duration)
     end
 end

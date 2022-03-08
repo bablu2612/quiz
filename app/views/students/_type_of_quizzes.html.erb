@@ -19,7 +19,7 @@
                     </div>
                     <div class="ml-5 w-0 py-10 flex-1">
                     <strong>
-                      <% unless @type_of_quiz[0].name.nil? %>
+                      <% unless @type_of_quiz[0].name.nil? ||  @type_of_quiz[0].name == "" %>
                         <%= @type_of_quiz[0].name %>
                       <% else %>
                         <%= @type_of_quiz[0].type.name %>
@@ -51,7 +51,7 @@
                         -->
                     </div>
                     <div class="ml-5 w-0 flex-1 py-10">
-                    <% unless @type_of_quiz[2].name.nil? %>
+                    <% unless @type_of_quiz[2].name.nil? ||  @type_of_quiz[2].name == "" %>
                         <%= @type_of_quiz[2].name %>
                     <% else %>
                         <%= @type_of_quiz[2].type.name %>
@@ -81,7 +81,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <% unless @type_of_quiz[3].name.nil? %>
+                  <% unless @type_of_quiz[3].name.nil? ||  @type_of_quiz[3].name == "" %>
                     <%= @type_of_quiz[3].name %>
                   <% else %>
                     <%= @type_of_quiz[3].type.name %>
@@ -114,7 +114,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <% unless @type_of_quiz[1].name.nil? %>
+                  <% unless @type_of_quiz[1].name.nil? ||  @type_of_quiz[1].name == "" %>
                     <%= @type_of_quiz[1].name %>
                   <% else %>
                     <%= @type_of_quiz[1].type.name %>
@@ -147,7 +147,7 @@
                   <div class="ml-5 w-0 flex-1 py-10">
                   <strong><%= @type_of_quiz[4].name %></strong> 
                   <% notific= Notification.where(user_id: current_user.id , type_id: TypeOfQuiz.find(@type_of_quiz[4].id).type_id) %>
-                  <% unless @type_of_quiz[4].name.nil? %>
+                  <% unless @type_of_quiz[4].name.nil? ||  @type_of_quiz[4].name == "" %>
                     <%= @type_of_quiz[4].name %>
                   <% else %>
                     <%= @type_of_quiz[4].type.name %>
@@ -173,7 +173,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <% unless @type_of_quiz[5].name.nil? %>
+                  <% unless @type_of_quiz[5].name.nil? ||  @type_of_quiz[5].name == "" %>
                     <%= @type_of_quiz[5].name %>
                   <% else %>
                     <%= @type_of_quiz[5].type.name %>
@@ -204,7 +204,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <% unless @type_of_quiz[6].name.nil? %>
+                  <% unless @type_of_quiz[6].name.nil? ||  @type_of_quiz[6].name == "" %>
                     <%= @type_of_quiz[6].name %>
                   <% else %>
                     <%= @type_of_quiz[6].type.name %>
@@ -235,7 +235,7 @@
                     -->
                   </div>
                   <div class="ml-5 w-0 flex-1 py-10">
-                  <% unless @type_of_quiz[7].name.nil? %>
+                  <% unless @type_of_quiz[7].name.nil? ||  @type_of_quiz[7].name == "" %>
                     <%= @type_of_quiz[7].name %>
                   <% else %>
                     <%= @type_of_quiz[7].type.name %>

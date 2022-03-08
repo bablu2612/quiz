@@ -13,8 +13,12 @@
         <%= question.question %>
 
         <% end %>
-
-
+      </p>
+      <p>
+        <% unless question.explanation.nil? %> 
+          Explanation :-
+          <%= question.explanation %> 
+        <% end %>
       </p>
       <div class="mt-4 space-y-4 mb-6">
         <% if TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Fill ups"%>
