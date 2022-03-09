@@ -14,10 +14,6 @@
 
         <% end %>
       </p>
-      <p>
-        Explanation :
-        <%= question.explanation %>
-      </p>
       <div class="mt-4 space-y-4 mb-6">
       <% if TypeOfQuiz.find(params[:type_of_quiz]).type.name == "Fill ups"%>
       answer: <input type="text" id="<%= question.id %>" value="" name="filll<%= index+1 %>" class="fillups_options option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full">

@@ -1,5 +1,5 @@
 <div class="flex justify-between items-center w-full mt-8">
-      <h1 class="font-bold text-3xl uppercase text-gray-500">Questions</h1>
+      <h1 class="font-bold text-3xl uppercase text-gray-500 ml-4">Questions</h1>
     </div>
 
     <% if @quiz_results.present? %>
@@ -7,7 +7,9 @@
         <div role="group" aria-labelledby="label-notifications">
 
           <div class="w-full">
-          <div class="ml-3 text-grey-500 text-3xl "><h2><%= @score_data %></h2></div>
+          <% unless Type.find(@quiz_results.first.type_id).name == "Written question" %> 
+            <div class="ml-3 text-grey-500 text-3xl "><h2><%= @score_data %></h2></div>
+          <% end %>
 
             <div id="questions" class="min-w-full">
               <%= form_tag do%>
@@ -16,7 +18,7 @@
                 <div id="<%= dom_id question %>">
                 <% index=@quiz_results.find_index(question) %>
                 <div class="w-full px-8 py-4">
-                  <div class="max-w-lg">
+                  <div class="w-full">
                     <p class="text-xl text-gray-600">
                       Q<%= index+1 %>.&ensp;
                       <% if Type.find(question.type_id).name == "image question" %>
@@ -153,12 +155,9 @@
                     <% elsif Type.find(question.type_id).name == "Written question" %>    
                    
                     answer: <textarea  name="correct-answer" class="option-of-question options block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"  rows="4" cols="50" ><%= question.submited_ans %> </textarea>
-                    <% if question.correct_ans == question.submited_ans %>
-                    <span class="text-green-500"><b>correct</b></span>
-                    <% else %>
-                    <span class="text-red-500"><b>Incorrect</b></span>
-                    <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
-                    <% end %>
+                    
+                    <span class="text-sm">Correct answer:- </span>
+                    <span class="text-green-500"><%= question.correct_ans %></b></span>
               
                     <% else %>
                       <% question.options.each do |option| %>
@@ -183,6 +182,12 @@
                       <div class="text-green-500">Correct answer was <b><%= question.correct_ans %></b></div>
                       <% end %>
                     <% end %>
+                    <div>
+                      <% unless question.explanation.nil? || question.explanation == "" %>
+                        Explanation :- 
+                        <%= question.explanation %>
+                      <% end %>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -201,7 +206,7 @@
 
 
 
-                <%= link_to "Back", quiz_result_path,class: "float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium" %>
+                <%= link_to "Back", quiz_result_path,class: "mr-4 float-right rounded-lg py-3 px-5 bg-cyan-700 hover:bg-green-600 text-white block font-medium" %>
 
                 <% end %>
             </div>

@@ -8,11 +8,18 @@
             <div class="w-full py-2">
                 <span><%= result.first %></span>
                 <% if result.second == "Correct" %>
-                    <span class="text-green-500"><%= result.second %></span>
+                    <span class="text-green-400 text-sm"><%= result.second %>.</span>
+                    <span class="text-green-500 font-bold"><%= result.third %></span>
                 <% else %>
-                    <span class="text-red-500"><%= result.second %></span> 
-                    <span class="text-green-500"><%= result.third %></span> 
+                    <span class="text-red-500"><%= result.second %>.</span> 
+                    <span class="">Correct answer was</span>
+                    <span class="text-green-500 font-bold"><%= result.third %></span> 
                 <% end %>
+                <% unless result.fourth.nil? || result.fourth == "" %>
+                    <div class="text-gray-800 text-sm">Explanation :-</div>
+                    <div class="text-gray-800"><%= result.fourth%></div>
+                <% end %>
+
                 
             </div>
         <% end%>

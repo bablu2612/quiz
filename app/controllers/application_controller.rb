@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
+    before_action :module_names
     #rescue_from ActiveRecord::RecordNotFound, :with => :render_404
    
   private
@@ -12,6 +13,9 @@ class ApplicationController < ActionController::Base
     render partial:"errors/error_404"
   end
 
+  def module_names
+    @modules=ModuleName.all
+  end
   protected
 
 end

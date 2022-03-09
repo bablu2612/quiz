@@ -7,7 +7,6 @@ class StaticPagesController < ApplicationController
       end
     end
   def home
-    @modules=ModuleName.all
     @total_student=User.where(role: "student").count
     @total_quiz=Quiz.count
     @total_question=Question.count
