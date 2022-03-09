@@ -39,10 +39,10 @@
                   <tr style="background: #efefef;">
                 <% end %>
                 
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
                     <%= notification.title %>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
                     <%= notification.descriptions %>
                     </td>
 
@@ -52,7 +52,7 @@
                     <% @score = @score+1 %>
                     <% end %>
                     <% end %>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
                     <%= "#{@score}/#{notification.quiz_results.count}" %></td>
 
                     
@@ -63,10 +63,10 @@
                 
             
         
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
                     <%= notification.created_at %>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                    <td class="px-6 py-4 text-center text-sm font-medium">
                     <%= link_to "Details","/notification/#{notification.id}/result", class:"inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"%>
                     </td>
                 </tr>
